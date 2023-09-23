@@ -2,9 +2,8 @@
 
 const config = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
@@ -16,16 +15,21 @@ const config = {
         widest: '.25em',
       },
       fontFamily: {
-        // antonio: ['Antonio', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
+        ubuntu: ['Ubuntu', 'sans-serif'],
       },
       colors: {
-        'light-gray': '#858585',
-        'dark-gray': '#171717',
-        'cool-white': '#F4F3F1',
+        'cool-gray': '#F7F7F7',
+        'light-gray': '#939393',
+        'dark-gray': '#1E1E1E',
+        'light-purple': '#8762DE',
+        'neutral-purple': '#674BA9',
+        'light-green': '#67F2A1',
+        'dark-green': '#4EBB78',
       },
-      backgroundImage: () => ({
-        'gradient-to-black': 'linear-gradient(to bottom, transparent, black)',
-      }),
+      backgroundImage: {
+        'main-texture': "url('/images/wallpaper/dark-sand.jpg')",
+      },
       screens: {
         wide: '1440px',
       },
