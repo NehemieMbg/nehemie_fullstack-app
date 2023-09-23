@@ -31,7 +31,7 @@ const config = {
         'main-texture': "url('/images/wallpaper/dark-sand.jpg')",
       },
       screens: {
-        wide: '1440px',
+        wide: '1728px',
       },
     },
   },

@@ -13,11 +13,25 @@
 }
 
 html {
-  background-color: #212124;
+  color: white;
+  background-color: rgb(9 9 11);
   height: 100vh;
 }
 
 :root {
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(100%);
+  }
+  5%,
+  95% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 @layer components {
@@ -37,5 +51,10 @@ html {
     width: 100%;
     display: grid;
     grid-template-rows: max-content 1fr max-content;
+  }
+
+  .slider-content {
+    transform: translateX(100%);
+    animation: slide 8s backwards;
   }
 }

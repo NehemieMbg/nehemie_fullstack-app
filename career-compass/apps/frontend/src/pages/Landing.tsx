@@ -1,21 +1,12 @@
 import { Link } from 'react-router-dom';
 import { PlayIcon } from '@heroicons/react/24/solid';
+import Logo from '../components/Logo';
 
 const Landing = () => {
   return (
-    <section className="relative p-10 px-20 h-screen bg-zinc-950 text-zinc-200 display-grid max-xl:px-16 max-lg:px-12 max-md:px-8">
+    <section className="relative p-10 px-20 max-xl:px-16 max-lg:px-12 max-md:px-8 h-screen bg-zinc-950 text-zinc-200 display-grid ">
       <nav className="w-full flex items-center justify-between justify-self-start">
-        <Link
-          to={'/'}
-          className="text-white flex gap-2 items-center font-ubuntu font-light text-xl"
-        >
-          <img
-            src="/logo-white.png"
-            alt="Career Compass logo"
-            className="h-16"
-          />
-          <p className="max-sm:hidden">Career Compass</p>
-        </Link>
+        <Logo />
 
         <div className="flex items-center gap-10 font-light">
           <Link
