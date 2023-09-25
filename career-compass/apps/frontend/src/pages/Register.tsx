@@ -76,7 +76,7 @@ const Register = () => {
 
           {/* <p className="text-sm">Forgot password ?</p> */}
           <button className="bg-light-purple w-full py-3 px-4 rounded-2xl font-roboto font-normal hover:bg-neutral-purple transition-colors duration-200 text-dark-gray">
-            Login
+            Sign Up
           </button>
           <div className="flex gap-2 text-sm text-light-gray mt-8">
             <p>Already have an account ?</p>

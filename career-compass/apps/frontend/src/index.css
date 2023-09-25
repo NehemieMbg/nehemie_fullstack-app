@@ -47,6 +47,10 @@ html {
     height: calc(100% - 40px);
   }
 
+  .h-sidebar {
+    height: calc(100vh - 90px);
+  }
+
   .display-grid {
     width: 100%;
     display: grid;

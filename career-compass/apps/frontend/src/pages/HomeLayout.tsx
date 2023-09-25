@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 const HomeLayout = () => {
   return (
-    <div className="">
+    <div className="font-roboto">
       <Outlet /> {/* The children */}
     </div>
   );
