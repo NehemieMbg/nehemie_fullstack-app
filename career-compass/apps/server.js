@@ -2,6 +2,12 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
 import morgan from 'morgan';
+import { nanoid } from 'nanoid';
+
+let jobs = [
+  { id: nanoid(), company: 'apple', position: 'front-end' },
+  { id: nanoid(), company: 'google', position: 'back-end' },
+];
 
 const app = express();
 
@@ -18,6 +24,10 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   console.log(req);
   res.status(200).json({ message: 'success', data: req.body });
+});
+
+app.get('/api/v1/jobs', (req, res) => {
+  res.status(200).json({ message: 'success', data: jobs });
 });
 
 // port will be injected by the platform
