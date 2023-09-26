@@ -1,0 +1,13 @@
+{
+  "name": "apps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "setup-project": "npm i && cd frontend && npm i"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
