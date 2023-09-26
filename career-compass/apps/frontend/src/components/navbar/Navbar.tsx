@@ -1,35 +1,45 @@
-import { Bars3Icon, MoonIcon, SunIcon } from '@heroicons/react/24/solid';
+import { Bars3Icon } from '@heroicons/react/24/solid';
 import { useDashboardContext } from '../../pages/DashboardLayout';
+import { useLocation } from 'react-router-dom';
+import Logout from './Logout';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
-  const { toggleSideBar, isDarkTheme, user } = useDashboardContext();
+  const location = useLocation();
+  const pathArray = location.pathname.split('/')[2];
+  let pathname = 'Add Job';
+
+  if (pathArray === 'all-jobs') pathname = 'Overview';
+  if (pathArray === 'stats') pathname = 'Stats';
+  if (pathArray === 'profile') pathname = 'Profile';
+  if (pathArray === 'admin') pathname = 'Admin';
+
+  const { toggleSideBar, isLightTheme } = useDashboardContext();
+
   return (
-    <div className="w-full flex items-center justify-between font-roboto">
+    <div
+      className={`w-full flex items-center justify-between font-roboto
+    `}
+    >
       <div className="flex items-center gap-4">
         <div
-          className="cursor-pointer min-[1050px]:hidden"
+          className={`cursor-pointer min-[1050px]:hidden p-1 rounded-md transition-colors duration-200
+          ${isLightTheme ? 'hover:bg-zinc-300' : ''}
+          `}
           onClick={toggleSideBar}
         >
-          <Bars3Icon className="h-6 hover:fill-light-gray transition-colors duration-200 " />
+          <Bars3Icon
+            className={`h-6 transition-colors duration-200
+            ${isLightTheme ? '' : 'hover:fill-light-gray'}
+          `}
+          />
         </div>
-        <h1 className="text-2xl font-light">Overview</h1>
+        <h1 className="text-xl font-light">{pathname}</h1>
       </div>
 
-      <div className="flex items-center gap-6">
-        {isDarkTheme ? (
-          <div className="cursor-pointer">
-            <MoonIcon className="h-5 fill-light-gray hover:fill-white transition-colors duration-200" />
-          </div>
-        ) : (
-          <div className="cursor-pointer">
-            <SunIcon className="h-6 fill-light-gray hover:fill-white transition-colors duration-200" />
-          </div>
-        )}
-
-        <div className="text-base font-light">
-          <p>Hi, {user.name}</p>
-        </div>
-        <img src="" alt="" />
+      <div className="relative flex items-center gap-4">
+        <ThemeToggle />
+        <Logout />
       </div>
     </div>
   );

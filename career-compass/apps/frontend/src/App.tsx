@@ -28,12 +28,14 @@ const router = createBrowserRouter([
       {
         path: 'dashboard',
         element: <DashboardLayout />,
-        children: [{ index: true, element: <AddJob /> }],
+        children: [
+          { index: true, element: <AddJob /> },
+          { path: 'all-jobs', element: <AllJobs /> },
+          { path: 'stats', element: <Stats /> },
+          { path: 'profile', element: <Profile /> },
+          { path: 'admin', element: <Admin /> },
+        ],
       },
-      { path: 'stats', element: <Stats /> },
-      { path: 'all-jobs', element: <AllJobs /> },
-      { path: 'profile', element: <Profile /> },
-      { path: 'admin', element: <Admin /> },
     ],
   },
 ]);
