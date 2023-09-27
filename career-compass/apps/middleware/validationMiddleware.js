@@ -70,6 +70,7 @@ export const validateRegisterInput = withValidationErrors([
       const user = await User.findOne({ email }); // Using findOne instead of find because we only want to find one user
       if (user) throw new BadRequestError('Email already exists');
     }),
+  body('location').notEmpty().withMessage('Location is required'),
   body('password')
     .isLength({ min: 8 })
     .withMessage('Password must be at least 8 characters long'),
@@ -87,4 +88,20 @@ export const validateLoginInput = withValidationErrors([
     .isEmail()
     .withMessage('Invalid email format'),
   body('password').notEmpty().withMessage('Password is required'),
+]);
+
+export const validateUpdateUserInput = withValidationErrors([
+  body('name').notEmpty().withMessage('Name is required'),
+  body('lastName').notEmpty().withMessage('Last name is required'),
+  body('email')
+    .isEmail()
+    .withMessage('Email is invalid')
+    .isEmail()
+    .withMessage('Invalid email format')
+    .custom(async (email, { req }) => {
+      const user = await User.findOne({ email }); // Using findOne instead of find because we only want to find one user
+      if (user && user._id.toString() !== req.user.userId)
+        throw new BadRequestError('Email already exists');
+    }),
+  body('location').notEmpty().withMessage('Location is required'),
 ]);
