@@ -1,10 +1,48 @@
-import { Link } from 'react-router-dom';
+import {
+  Form,
+  redirect,
+  useNavigation,
+  Link,
+  ActionFunctionArgs,
+} from 'react-router-dom';
 import AuthInputForm from '../components/authForm/AuthInputForm';
 import Logo from '../components/Logo';
 import ReviewSlider from '../components/animated/ReviewSlider';
 import PasswordInputForm from '../components/authForm/PasswordInputForm';
+import customFetch from '../utils/customFetch';
+import {
+  registerError,
+  errorInput as errorInputObject,
+} from '../utils/errorInput';
+import { AxiosError } from 'axios';
+// import toast, { Toaster } from 'react-hot-toast';
+// const notify = () => toast.success('Account created successfully !');
+
+// setting up the error input object
+let errorInput = errorInputObject;
+
+export const action = async ({ request }: ActionFunctionArgs) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData); // transform FormData into regular object
+
+  try {
+    await customFetch.post('/auth/register', data);
+    return redirect('/login');
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      errorInput = registerError(error.response?.data.message, errorInput);
+      console.log(errorInput);
+    }
+    console.log(error);
+    return error;
+  }
+};
 
 const Register = () => {
+  const navigation = useNavigation();
+  console.log(navigation);
+  const isSubmitting = navigation.state === 'submitting';
+
   return (
     <section className=" h-screen grid grid-cols-2 gap-8 text-white font-light p-10 max-xl:px-16 max-lg:px-12 max-md:px-8 max-w-screen-wide w-full mx-auto max-[1350px]:grid-cols-1">
       <div className="bg-[url('/images/wallpaper/dark-sand.jpg')] bg-cover w-full  rounded-3xl overflow-hidden max-[1350px]:hidden">
@@ -30,8 +68,8 @@ const Register = () => {
       </div>
 
       <div className="flex flex-col items-center justify-center">
-        <form
-          action=""
+        <Form
+          method="post"
           className="flex flex-col items-center gap-4 w-full max-w-[300px]"
         >
           <div>
@@ -44,13 +82,15 @@ const Register = () => {
             defaultValue="jhon"
             placeholder="Name"
             required={true}
+            error={errorInput.name}
           />
           <AuthInputForm
             type="text"
-            name="lastname"
+            name="lastName"
             defaultValue="jhon"
             placeholder="Last Name"
             required={true}
+            error={errorInput.lastName}
           />
           <AuthInputForm
             type="email"
@@ -58,6 +98,15 @@ const Register = () => {
             defaultValue="test@gmail.com"
             placeholder="Email"
             required={true}
+            error={errorInput.email}
+          />
+          <AuthInputForm
+            type="text"
+            name="location"
+            defaultValue="Paris"
+            placeholder="Location"
+            required={true}
+            error={errorInput.location}
           />
           <PasswordInputForm
             type="password"
@@ -65,18 +114,23 @@ const Register = () => {
             defaultValue="test1234"
             placeholder="Password"
             required={true}
+            error={errorInput.password}
           />
           <PasswordInputForm
             type="password"
-            name="password-confirm"
+            name="passwordConfirm"
             defaultValue="test1234"
             placeholder="Password Confirmation"
             required={true}
+            error={errorInput.passwordConfirm}
           />
 
           {/* <p className="text-sm">Forgot password ?</p> */}
-          <button className="bg-light-purple w-full py-3 px-4 rounded-2xl font-roboto font-normal hover:bg-neutral-purple transition-colors duration-200 text-dark-gray">
-            Sign Up
+          <button
+            className="bg-light-purple w-full py-3 px-4 rounded-2xl font-roboto font-normal hover:bg-neutral-purple transition-colors duration-200 text-dark-gray"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Submitting...' : 'Sign Up'}
           </button>
           <div className="flex gap-2 text-sm text-light-gray mt-8">
             <p>Already have an account ?</p>
@@ -87,7 +141,7 @@ const Register = () => {
               Log In
             </Link>
           </div>
-        </form>
+        </Form>
       </div>
     </section>
   );

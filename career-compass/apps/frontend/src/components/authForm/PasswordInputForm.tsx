@@ -1,5 +1,9 @@
 import { useState } from 'react';
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
+import {
+  ExclamationCircleIcon,
+  EyeIcon,
+  EyeSlashIcon,
+} from '@heroicons/react/24/solid';
 
 interface PasswordInputProps {
   type: string;
@@ -8,6 +12,7 @@ interface PasswordInputProps {
   defaultValue?: string;
   required?: boolean;
   placeholder?: string;
+  error?: string;
 }
 
 const PasswordInputForm: React.FC<PasswordInputProps> = ({
@@ -16,6 +21,7 @@ const PasswordInputForm: React.FC<PasswordInputProps> = ({
   defaultValue,
   required,
   placeholder,
+  error,
 }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -24,7 +30,7 @@ const PasswordInputForm: React.FC<PasswordInputProps> = ({
   };
 
   return (
-    <div className="relative w-full h-12">
+    <div className="relative w-full">
       <label htmlFor={name}></label>
       <input
         type={isPasswordVisible ? 'text' : type}
@@ -33,7 +39,9 @@ const PasswordInputForm: React.FC<PasswordInputProps> = ({
         defaultValue={defaultValue}
         required={required}
         placeholder={placeholder}
-        className="w-full h-full outline-none text-cool-gray font-ubuntu rounded-2xl py-2 px-4 bg-inherit border border-light-gray"
+        className={`w-full h-12 outline-none text-cool-gray font-ubuntu rounded-2xl py-2 px-4 bg-inherit border border-light-gray
+        ${error ? 'border-red-500' : ''}
+        `}
       />
       <div
         className="absolute top-4 right-4 cursor-pointer"
@@ -45,6 +53,14 @@ const PasswordInputForm: React.FC<PasswordInputProps> = ({
           <EyeIcon className="fill-light-gray h-5" />
         )}
       </div>
+      {error && (
+        <p className="flex gap-2 font-roboto font-light px-2 mt-2 text-red-500">
+          <span>
+            <ExclamationCircleIcon className="h-5 mt-[1px]" />
+          </span>
+          {error}
+        </p>
+      )}
     </div>
   );
 };
