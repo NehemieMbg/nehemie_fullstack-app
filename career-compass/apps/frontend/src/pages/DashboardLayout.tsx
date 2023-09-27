@@ -76,7 +76,7 @@ const DashboardLayout = () => {
         `}
         ></div>
         <div
-          className={`h-screen bg-zinc-950 max-[1050px]:translate-x-[-100%] max-[1050px]:absolute transition-transform duration-200 w-[250px]  z-40
+          className={`h-screen  max-[1050px]:translate-x-[-100%] max-[1050px]:absolute transition-transform duration-200 w-[250px]  z-40
           ${isSidebar ? 'max-[1050px]:translate-x-[0px]' : ''}
           ${isLightTheme ? 'bg-cool-gray' : 'bg-zinc-950 '}
           `}

@@ -31,9 +31,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
       errorInput = registerError(error.response?.data.message, errorInput);
-      console.log(errorInput);
+      return error?.response?.data?.message;
     }
-    console.log(error);
     return error;
   }
 };

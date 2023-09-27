@@ -1,10 +1,41 @@
-import { Link } from 'react-router-dom';
+import {
+  Link,
+  Form,
+  redirect,
+  useNavigation,
+  // useActionData,
+  ActionFunctionArgs,
+} from 'react-router-dom';
 import AuthInputForm from '../components/authForm/AuthInputForm';
 import Logo from '../components/Logo';
 import ReviewSlider from '../components/animated/ReviewSlider';
 import PasswordInputForm from '../components/authForm/PasswordInputForm';
+import customFetch from '../utils/customFetch';
+import { AxiosError } from 'axios';
+import { errorLoginInput, loginError } from '../utils/errorInput';
+
+let errorInput = errorLoginInput;
+
+export const action = async ({ request }: ActionFunctionArgs) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData); // transform FormData into regular object
+
+  try {
+    await customFetch.post('/auth/login', data);
+    return redirect('/dashboard');
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      errorInput = loginError(error?.response?.data?.message);
+      return error?.response?.data?.message;
+    }
+    return error;
+  }
+};
 
 const Login = () => {
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === 'submitting';
+
   return (
     <section className=" h-screen grid grid-cols-2 gap-8 text-white font-light p-10 max-xl:px-16 max-lg:px-12 max-md:px-8 max-w-screen-wide w-full mx-auto max-[1350px]:grid-cols-1 ">
       <div className="bg-[url('/images/wallpaper/dark-sand.jpg')] bg-cover w-full  rounded-3xl overflow-hidden max-[1350px]:hidden">
@@ -30,7 +61,8 @@ const Login = () => {
       </div>
 
       <div className="flex flex-col items-center justify-center">
-        <form
+        <Form
+          method="post"
           action=""
           className="flex flex-col items-center gap-4 w-full max-w-[300px]"
         >
@@ -43,19 +75,23 @@ const Login = () => {
             name="email"
             defaultValue="test@gmail.com"
             placeholder="Email"
-            required={true}
+            required={false}
+            error={errorInput.email || errorInput.invalidCredentials}
           />
           <PasswordInputForm
             type="password"
             name="password"
             defaultValue="test1234"
             placeholder="Password"
-            required={true}
+            required={false}
+            error={errorInput.password || errorInput.invalidCredentials}
           />
           <p className="text-sm">Forgot password ?</p>
-
-          <button className="bg-light-purple w-full py-3 px-4 rounded-2xl font-roboto font-normal hover:bg-neutral-purple transition-colors duration-200 text-dark-gray">
-            Login
+          <button
+            className="bg-light-purple w-full py-3 px-4 rounded-2xl font-roboto font-normal hover:bg-neutral-purple transition-colors duration-200 text-dark-gray"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Submitting' : 'Login'}
           </button>
           <div className="flex gap-2 text-sm text-light-gray mt-8">
             <p>Don't have an account yet ?</p>
@@ -66,7 +102,7 @@ const Login = () => {
               Sign up
             </Link>
           </div>
-        </form>
+        </Form>
       </div>
     </section>
   );

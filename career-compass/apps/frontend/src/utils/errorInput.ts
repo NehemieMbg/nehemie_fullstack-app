@@ -50,3 +50,35 @@ export const registerError = (errorMessage: string, errorInput: ErrorInput) => {
   console.log({ ...errorInput, ...newErrorInput });
   return { ...errorInput, ...newErrorInput };
 };
+
+export const errorLoginInput = {
+  email: '',
+  password: '',
+  invalidCredentials: '',
+} as { email: string; password: string; invalidCredentials: string };
+
+export const loginError = (errorMessage: string) => {
+  // split to individual error messages
+  const errorMessages = errorMessage.split(',').reverse();
+
+  // Initialize a new errorInput object
+  const newErrorInput = {
+    email: '',
+    password: '',
+    invalidCredentials: '',
+  };
+
+  // Loop through the error messages and set the corresponding properties in newErrorInput
+  for (const message of errorMessages) {
+    if (message.toLocaleLowerCase().includes('email'))
+      newErrorInput.email = message;
+    else if (message.toLocaleLowerCase().includes('password'))
+      newErrorInput.password = message;
+    else if (message.toLocaleLowerCase().includes('credentials'))
+      newErrorInput.invalidCredentials = message;
+  }
+
+  // Merge the original errorInput with the newErrorInput
+  console.log({ ...errorLoginInput, ...newErrorInput });
+  return { ...errorLoginInput, ...newErrorInput };
+};
