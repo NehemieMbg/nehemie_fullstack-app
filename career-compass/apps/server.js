@@ -1,38 +1,39 @@
+import 'express-async-errors'; // needs to be at the very top to work
 import * as dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
 import morgan from 'morgan';
-import { nanoid } from 'nanoid';
-
-let jobs = [
-  { id: nanoid(), company: 'apple', position: 'front-end' },
-  { id: nanoid(), company: 'google', position: 'back-end' },
-];
-
+import mongoose from 'mongoose';
 const app = express();
+
+// Routers
+import jobRouter from './routes/jobRouter.js';
+// middlewares
+import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev')); // To log info about requests
 }
-
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+app.use('/api/v1/jobs', jobRouter);
+
+app.use('*', (req, res) => {
+  res.status(404).json({ message: 'Not Found' });
 });
 
-app.post('/', (req, res) => {
-  console.log(req);
-  res.status(200).json({ message: 'success', data: req.body });
-});
-
-app.get('/api/v1/jobs', (req, res) => {
-  res.status(200).json({ message: 'success', data: jobs });
-});
+// This middleware has to be the last one
+app.use(errorHandlerMiddleware);
 
 // port will be injected by the platform
 const port = process.env.PORT || 5100;
 
-app.listen(port, () => {
-  console.log(`Server running on PORT ${port}...`);
-});
+try {
+  await mongoose.connect(process.env.MONGO_URL);
+  app.listen(port, () => {
+    console.log(`Server running on PORT ${port}...`);
+  });
+} catch (error) {
+  console.log(error);
+  process.exit(1); // 1 stand for error (same in C)
+}
