@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, redirect, useLoaderData } from 'react-router-dom';
 import { Navbar, Sidebar } from '../components';
 import { createContext, useContext, useRef, useState } from 'react';
 import useClickOutside from '../hooks/useClickOutside';
@@ -11,6 +11,11 @@ interface DashboardContextType {
   toggleDarkTheme: () => void;
   logoutUser: () => void;
 }
+
+export const loader = () => {
+  return 'Hello world';
+};
+
 const DashboardContext = createContext<DashboardContextType>({
   isLightTheme: false,
   isSidebar: false,
@@ -27,6 +32,9 @@ const checkDefaultTheme = () => {
 };
 
 const DashboardLayout = () => {
+  const data = useLoaderData();
+  console.log(data);
+
   const sidebarRef = useRef<HTMLDivElement | null>(null);
 
   // temp
