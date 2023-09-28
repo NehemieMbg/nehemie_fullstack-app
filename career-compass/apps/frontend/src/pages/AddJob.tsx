@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import customFetch from '../utils/customFetch';
 import { JOB_STATUS, JOB_TYPE } from '../constants';
-import { SelectFrom, InputForm } from '../components';
+import { SelectFrom, InputFormJob } from '../components';
 import { User } from '../types/userType';
 import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
@@ -51,43 +51,45 @@ const AddJob = () => {
   }, [errors]);
 
   // Setting input styles
-  const inputClassName = `border-2 border-opacity-70 font-normal ${
+  const inputClassName = `border-1 border-opacity-70 font-normal ${
     isLightTheme
       ? 'border-white placeholder-zinc-500'
       : 'border-black placeholder-zinc-500'
   }`;
 
   return (
-    <div className="py-8">
+    <div className="py-8 w-full font-roboto">
       <div
-        className={`w-full  rounded-3xl p-10 max-lg:p-6 max-md:p-4
-      ${isLightTheme ? 'bg-black text-white' : 'bg-white text-black'}
+        className={`relative w-1/3 max-w-screen-wide rounded-3xl max-lg:rounded-2xl max-md-rounded-xl p-6 max-lg:p-6 max-md:p-4
+      ${isLightTheme ? 'bg-black text-white' : 'bg-dark-gray text-white'}
     `}
       >
         <Form method="post" action="" className="">
           <h4
-            className={`font-ubuntu font-normal text-3xl mb-10 max-lg:text-2xl max-lg:mb-6 
+            className={`font-light text-2xl mb-8 max-lg:text-xl max-lg:mb-6 
           `}
           >
-            Submit Details of a New Application
+            Submit Details of a New
+            <br />
+            Application
           </h4>
 
-          <div className="flex gap-10 mb-8 max-xl:gap-6 max-lg:gap-4 max-lg:flex-wrap max-lg:mb-4">
-            <InputForm
+          <div className="mb-2 flex flex-col gap-2">
+            <InputFormJob
               type="text"
               name="position"
               placeholder="Position"
               className={inputClassName}
               error={errorInput.position}
             />
-            <InputForm
+            <InputFormJob
               type="text"
               name="company"
               placeholder="Company"
               className={inputClassName}
               error={errorInput.company}
             />
-            <InputForm
+            <InputFormJob
               type="text"
               name="jobLocation"
               placeholder="Job Location (e.g. Paris, France)"
@@ -96,7 +98,7 @@ const AddJob = () => {
               error={errorInput.jobLocation}
             />
           </div>
-          <div className="flex gap-10 max-xl:gap-6 max-lg:gap-4 max-lg:flex-wrap">
+          <div className="flex gap-2 mb-6">
             <SelectFrom
               name="jobStatus"
               defaultValue={JOB_STATUS.PENDING}
@@ -109,9 +111,10 @@ const AddJob = () => {
               list={Object.values(JOB_TYPE)}
               className={inputClassName}
             />
-
+          </div>
+          <div className="w-full">
             <button
-              className={`w-full py-3 rounded-2xl font-ubuntu font-normal  transition-colors duration-20 bg-light-purple text-white hover:bg-neutral-purple`}
+              className={`py-1 px-3 ml-auto rounded-lg font-roboto  transition-colors duration-200  bg-purple-500 text-purple-300 bg-opacity-50  hover:bg-opacity-70 `}
               disabled={isSubmitting}
             >
               {isSubmitting ? 'Submitting' : 'Add Job'}

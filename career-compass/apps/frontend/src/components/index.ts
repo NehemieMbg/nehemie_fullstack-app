@@ -6,3 +6,6 @@ export { default as InputForm } from './FormInputs/InputForm';
 export { default as PasswordInputForm } from './FormInputs/PasswordInputForm';
 export { default as SelectFrom } from './FormInputs/SelectForm';
 export { default as ReviewSlider } from './animated/ReviewSlider';
+export { default as JobsContainer } from './jobs/JobsContainer';
+export { default as SearchContainer } from './search/SearchContainer';
+export { default as InputFormJob } from './FormInputs/InputFormJob';

@@ -18,7 +18,7 @@ const SelectForm: React.FC<SelectProps> = ({
         name={name}
         id={name}
         defaultValue={defaultValue}
-        className={`h-12 w-full outline-none text-inherit font-roboto rounded-2xl py-2 px-4 bg-inherit border border-light-gray
+        className={`w-full outline-none text-inherit font-roboto rounded-xl px-3 py-2 bg-inherit border border-zinc-900 bg-neutral-950 bg-opacity-50 font-light placeholder-neutral-500
 		${className}
 		`}
       >
