@@ -29,7 +29,9 @@ const Logout = () => {
         onClick={() => setIsLogoutActive(true)}
       >
         <div className="text-base font-light max-md:hidden">
-          <p>Hi, {user.name}</p>
+          <p>
+            Hi, {user.name} {user.lastName}
+          </p>
         </div>
 
         {user.image ? (

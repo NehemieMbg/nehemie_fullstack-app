@@ -1,25 +1,33 @@
-import { Outlet, redirect, useLoaderData } from 'react-router-dom';
+import { Outlet, redirect, useLoaderData, useNavigate } from 'react-router-dom';
 import { Navbar, Sidebar } from '../components';
 import { createContext, useContext, useRef, useState } from 'react';
 import useClickOutside from '../hooks/useClickOutside';
+import customFetch from '../utils/customFetch';
+import { User } from '../types/userType';
+import { DashboardContext as DashboardContextType } from '../types/dashboardType';
 
-interface DashboardContextType {
-  user: { name: string; image: string };
-  isLightTheme: boolean;
-  isSidebar: boolean;
-  toggleSideBar: () => void;
-  toggleDarkTheme: () => void;
-  logoutUser: () => void;
-}
-
-export const loader = () => {
-  return 'Hello world';
+// redirect if we cannot get hold of the user to the homepage
+export const loader = async () => {
+  try {
+    const { data } = await customFetch.get('/users/current-user');
+    return data;
+  } catch (error) {
+    return redirect('/');
+  }
 };
 
 const DashboardContext = createContext<DashboardContextType>({
   isLightTheme: false,
   isSidebar: false,
-  user: { name: '', image: '' },
+  user: {
+    email: '',
+    name: '',
+    image: '',
+    lastName: '',
+    location: '',
+    _id: '',
+    role: '',
+  },
   logoutUser: () => {},
   toggleDarkTheme: () => {},
   toggleSideBar: () => {},
@@ -32,13 +40,11 @@ const checkDefaultTheme = () => {
 };
 
 const DashboardLayout = () => {
-  const data = useLoaderData();
-  console.log(data);
+  const { user } = useLoaderData() as { user: User };
+  const navigate = useNavigate();
 
   const sidebarRef = useRef<HTMLDivElement | null>(null);
 
-  // temp
-  const user = { name: 'John Doe', image: '' };
   const [isSidebar, setSidebar] = useState(false);
   const [isLightTheme, setIsLightTheme] = useState(checkDefaultTheme);
 
@@ -57,21 +63,24 @@ const DashboardLayout = () => {
   };
 
   const logoutUser = async () => {
-    // console.log('Logout user');
+    navigate('/');
+    await customFetch.get('/auth/logout');
   };
 
   useClickOutside(sidebarRef, () => setSidebar(false));
 
   return (
     <DashboardContext.Provider
-      value={{
-        user,
-        isLightTheme,
-        isSidebar,
-        toggleSideBar,
-        toggleDarkTheme,
-        logoutUser,
-      }}
+      value={
+        {
+          user,
+          isLightTheme,
+          isSidebar,
+          toggleSideBar,
+          toggleDarkTheme,
+          logoutUser,
+        } as DashboardContextType
+      }
     >
       <main
         className={`flex gap-4 max-[1050px]:gap-0 w-screen min-h-screen
@@ -97,7 +106,7 @@ const DashboardLayout = () => {
           <Navbar />
 
           <div className="py-[40px] font-light">
-            <Outlet />
+            <Outlet context={{ user }} />
           </div>
         </div>
       </main>
