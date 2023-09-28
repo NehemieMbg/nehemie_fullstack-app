@@ -34,7 +34,7 @@ const Navbar = () => {
           `}
           />
         </div>
-        <h1 className="text-xl font-light">{pathname}</h1>
+        <h2 className="text-xl font-ubuntu font-normal">{pathname}</h2>
       </div>
 
       <div className="relative flex items-center gap-4">

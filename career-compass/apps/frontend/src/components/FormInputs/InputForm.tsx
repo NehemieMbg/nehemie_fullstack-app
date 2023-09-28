@@ -31,9 +31,8 @@ const InputForm: React.FC<InputProps> = ({
         required={required}
         placeholder={placeholder}
         className={`h-12 w-full outline-none text-inherit font-roboto rounded-2xl py-2 px-4 bg-inherit border border-light-gray
-        ${className}
-        ${error ? 'border-red-500' : ''}
-        `}
+        ${error ? 'border-red-500' : ` ${className}`} 
+        `} // Using className as the else statement to add the red borders on error
       />
       {error && (
         <p className="flex gap-2 font-roboto font-light px-2 mt-2 text-red-500">

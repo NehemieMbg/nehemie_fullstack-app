@@ -4,22 +4,16 @@ import {
   useNavigation,
   Link,
   ActionFunctionArgs,
+  useActionData,
 } from 'react-router-dom';
 import InputForm from '../components/FormInputs/InputForm';
 import Logo from '../components/Logo';
 import ReviewSlider from '../components/animated/ReviewSlider';
 import PasswordInputForm from '../components/FormInputs/PasswordInputForm';
 import customFetch from '../utils/customFetch';
-import {
-  registerError,
-  errorInput as errorInputObject,
-} from '../utils/errorInput';
+import { registerError } from '../utils/errorInput';
 import { AxiosError } from 'axios';
-// import toast, { Toaster } from 'react-hot-toast';
-// const notify = () => toast.success('Account created successfully !');
-
-// setting up the error input object
-let errorInput = errorInputObject;
+import { useEffect, useState } from 'react';
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
@@ -30,7 +24,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     return redirect('/login');
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
-      errorInput = registerError(error.response?.data.message, errorInput);
       return error?.response?.data?.message;
     }
     return error;
@@ -38,9 +31,23 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 };
 
 const Register = () => {
+  const errors = useActionData();
   const navigation = useNavigation();
-  console.log(navigation);
   const isSubmitting = navigation.state === 'submitting';
+
+  // managing errors
+  const [errorInput, setErrorInput] = useState({
+    name: '',
+    lastName: '',
+    email: '',
+    location: '',
+    password: '',
+    passwordConfirm: '',
+  });
+
+  useEffect(() => {
+    if (typeof errors === 'string') setErrorInput(registerError(errors));
+  }, [errors]);
 
   return (
     <section className=" h-screen grid grid-cols-2 gap-8 text-white font-light p-10 max-xl:px-16 max-lg:px-12 max-md:px-8 max-w-screen-wide w-full mx-auto max-[1350px]:grid-cols-1">

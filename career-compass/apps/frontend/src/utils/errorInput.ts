@@ -1,27 +1,10 @@
-interface ErrorInput {
-  name: string;
-  lastName: string;
-  email: string;
-  location: string;
-  password: string;
-  passwordConfirm: string;
-}
-
-export const errorInput = {
-  name: '',
-  lastName: '',
-  email: '',
-  location: '',
-  password: '',
-  passwordConfirm: '',
-};
-
-export const registerError = (errorMessage: string, errorInput: ErrorInput) => {
+// Register page
+export const registerError = (errorMessage: string) => {
   // split to individual error messages
   const errorMessages = errorMessage.split(',').reverse();
 
   // Initialize a new errorInput object
-  const newErrorInput: ErrorInput = {
+  const newErrorInput = {
     name: '',
     lastName: '',
     email: '',
@@ -47,16 +30,10 @@ export const registerError = (errorMessage: string, errorInput: ErrorInput) => {
   }
 
   // Merge the original errorInput with the newErrorInput
-  console.log({ ...errorInput, ...newErrorInput });
-  return { ...errorInput, ...newErrorInput };
+  return { ...newErrorInput };
 };
 
-export const errorLoginInput = {
-  email: '',
-  password: '',
-  invalidCredentials: '',
-} as { email: string; password: string; invalidCredentials: string };
-
+// Login page
 export const loginError = (errorMessage: string) => {
   // split to individual error messages
   const errorMessages = errorMessage.split(',').reverse();
@@ -79,6 +56,32 @@ export const loginError = (errorMessage: string) => {
   }
 
   // Merge the original errorInput with the newErrorInput
-  console.log({ ...errorLoginInput, ...newErrorInput });
-  return { ...errorLoginInput, ...newErrorInput };
+  return { ...newErrorInput };
+};
+
+// AddJob page
+export const addJobError = (errorMessage: string) => {
+  const errorMessages = errorMessage.split(',').reverse();
+
+  // Initialize a new errorInput object
+  const newErrorInput = {
+    company: '',
+    jobLocation: '',
+    jobStatus: '',
+    jobType: '',
+    position: '',
+  };
+
+  // Loop through the error messages and set the corresponding properties in newErrorInput
+  for (const message of errorMessages) {
+    if (message.toLocaleLowerCase().includes('company'))
+      newErrorInput.company = message;
+    else if (message.toLocaleLowerCase().includes('location'))
+      newErrorInput.jobLocation = message;
+    else if (message.toLocaleLowerCase().includes('position'))
+      newErrorInput.position = message;
+  }
+
+  // Merge the original errorInput with the newErrorInput
+  return { ...newErrorInput };
 };

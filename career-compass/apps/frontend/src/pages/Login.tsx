@@ -3,7 +3,7 @@ import {
   Form,
   redirect,
   useNavigation,
-  // useActionData,
+  useActionData,
   ActionFunctionArgs,
 } from 'react-router-dom';
 import InputForm from '../components/FormInputs/InputForm';
@@ -12,9 +12,8 @@ import ReviewSlider from '../components/animated/ReviewSlider';
 import PasswordInputForm from '../components/FormInputs/PasswordInputForm';
 import customFetch from '../utils/customFetch';
 import { AxiosError } from 'axios';
-import { errorLoginInput, loginError } from '../utils/errorInput';
-
-let errorInput = errorLoginInput;
+import { loginError } from '../utils/errorInput';
+import { useEffect, useState } from 'react';
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
@@ -25,7 +24,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     return redirect('/dashboard');
   } catch (error) {
     if (error instanceof AxiosError) {
-      errorInput = loginError(error?.response?.data?.message);
       return error?.response?.data?.message;
     }
     return error;
@@ -33,10 +31,20 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 };
 
 const Login = () => {
+  const errors = useActionData();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
 
-  // const errors = useActionData(); // could also use useActionData hook to get the error message
+  // managing errors
+  const [errorInput, setErrorInput] = useState({
+    email: '',
+    password: '',
+    invalidCredentials: '',
+  });
+
+  useEffect(() => {
+    if (typeof errors === 'string') setErrorInput(loginError(errors));
+  }, [errors]);
 
   return (
     <section className=" h-screen grid grid-cols-2 gap-8 text-white font-light p-10 max-xl:px-16 max-lg:px-12 max-md:px-8 max-w-screen-wide w-full mx-auto max-[1350px]:grid-cols-1 ">

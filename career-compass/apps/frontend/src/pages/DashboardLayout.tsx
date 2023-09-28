@@ -106,7 +106,7 @@ const DashboardLayout = () => {
           <Navbar />
 
           <div className="py-[40px] font-light">
-            <Outlet context={{ user }} />
+            <Outlet context={{ user, isLightTheme }} />
           </div>
         </div>
       </main>
