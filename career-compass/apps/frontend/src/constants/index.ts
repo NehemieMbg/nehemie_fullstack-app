@@ -21,3 +21,22 @@ export const reviews = [
       'Career Compass has simplified my job search immensely! The ability to organize and monitor applications in one place has kept me on track and stress-free. It is straightforward, easy to use, and a must-have for anyone seeking new opportunities!',
   },
 ];
+
+export enum JOB_STATUS {
+  PENDING = 'pending',
+  INTERVIEW = 'interview',
+  DECLINED = 'declined',
+}
+
+export enum JOB_TYPE {
+  FULL_TIME = 'full-time',
+  PART_TIME = 'part-time',
+  INTERNSHIP = 'internship',
+}
+
+export enum JOB_SORT_BY {
+  NEWEST_FIRST = 'newest',
+  OLDEST_FIRST = 'oldest',
+  ASCENDING = 'a-z',
+  DESCENDING = 'z-a',
+}

@@ -6,10 +6,10 @@ import {
   // useActionData,
   ActionFunctionArgs,
 } from 'react-router-dom';
-import AuthInputForm from '../components/authForm/AuthInputForm';
+import InputForm from '../components/FormInputs/InputForm';
 import Logo from '../components/Logo';
 import ReviewSlider from '../components/animated/ReviewSlider';
-import PasswordInputForm from '../components/authForm/PasswordInputForm';
+import PasswordInputForm from '../components/FormInputs/PasswordInputForm';
 import customFetch from '../utils/customFetch';
 import { AxiosError } from 'axios';
 import { errorLoginInput, loginError } from '../utils/errorInput';
@@ -72,7 +72,7 @@ const Login = () => {
             <Logo className="flex-col gap-0 " />
             <p className="mb-2 text-light-gray">Log into your account</p>
           </div>
-          <AuthInputForm
+          <InputForm
             type="email"
             name="email"
             defaultValue="test@gmail.com"

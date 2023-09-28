@@ -1,6 +1,6 @@
 import { ExclamationCircleIcon } from '@heroicons/react/24/solid';
 
-interface AuthInputProps {
+interface InputProps {
   type: string;
   name: string;
   label?: string;
@@ -8,15 +8,17 @@ interface AuthInputProps {
   required?: boolean;
   placeholder?: string;
   error?: string;
+  className?: string;
 }
 
-const AuthInputForm: React.FC<AuthInputProps> = ({
+const InputForm: React.FC<InputProps> = ({
   type,
   name,
   defaultValue,
   required,
   placeholder,
   error,
+  className,
 }) => {
   return (
     <div className="w-full ">
@@ -28,7 +30,8 @@ const AuthInputForm: React.FC<AuthInputProps> = ({
         defaultValue={defaultValue}
         required={required}
         placeholder={placeholder}
-        className={`h-12 w-full outline-none text-cool-gray font-ubuntu rounded-2xl py-2 px-4 bg-inherit border border-light-gray
+        className={`h-12 w-full outline-none text-inherit font-roboto rounded-2xl py-2 px-4 bg-inherit border border-light-gray
+        ${className}
         ${error ? 'border-red-500' : ''}
         `}
       />
@@ -43,4 +46,4 @@ const AuthInputForm: React.FC<AuthInputProps> = ({
     </div>
   );
 };
-export default AuthInputForm;
+export default InputForm;
