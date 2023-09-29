@@ -16,14 +16,18 @@ const UserItem: React.FC<UserProps> = ({ user }) => {
       key={user._id}
       className="bg-dark-gray rounded-xl overflow-hidden p-6 "
     >
-      <div className="flex gap-4 pb-4 mb-4 border-b-[1px] border-b-zinc-700">
-        {user.image ? (
-          <img src="" alt="" className="w-12 h-12 aspect-square rounded-xl" />
+      <div className="flex items-center gap-4 pb-4 mb-4 border-b-[1px] border-b-zinc-700">
+        {user.avatar ? (
+          <img
+            src={user.avatar}
+            alt="avatar"
+            className="w-14 h-14 aspect-square rounded-full object-cover object-center"
+          />
         ) : (
-          <div className="w-12 h-12  bg-neutral-700 rounded-xl aspect-square"></div>
+          <div className="w-14 h-14  bg-neutral-700 rounded-full aspect-square"></div>
         )}
         <div className="leading-5">
-          <p className="text-lg">
+          <p className="text-base">
             {user.name.charAt(0).toUpperCase() + user.name.slice(1)}{' '}
             {user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1)}
           </p>

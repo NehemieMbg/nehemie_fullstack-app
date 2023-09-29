@@ -18,6 +18,7 @@ const InputFormJob: React.FC<InputProps> = ({
   defaultValue,
   required,
   placeholder,
+  label,
   error,
   className,
 }) => {
@@ -25,7 +26,9 @@ const InputFormJob: React.FC<InputProps> = ({
 
   return (
     <div className="w-full">
-      <label htmlFor={name}></label>
+      <label htmlFor={name} className="text-light-gray">
+        {label}
+      </label>
       <input
         type={type}
         id={name}
@@ -33,8 +36,8 @@ const InputFormJob: React.FC<InputProps> = ({
         defaultValue={defaultValue}
         required={required}
         placeholder={placeholder}
-        className={`w-full outline-none text-inherit font-roboto rounded-xl px-3 py-2 bg-inherit border  bg-neutral-950 bg-opacity-50 font-light placeholder-neutral-500
-		${isLightTheme ? 'bg-neutral-400 placeholder-slate-800' : 'text-white'}
+        className={`w-full bg-dark-gray p-2 rounded-md outline-none font-roboto placeholder-light-gray mt-1
+		${isLightTheme ? '' : ''}
         ${error ? 'border-red-500' : ` ${className} border-transparent`} 
         `} // Using className as the else statement to add the red borders on error
       />

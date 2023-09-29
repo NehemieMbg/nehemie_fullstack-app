@@ -1,8 +1,27 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { PlayIcon } from '@heroicons/react/24/solid';
 import Logo from '../components/Logo';
+import customFetch from '../utils/customFetch';
+import { AxiosError } from 'axios';
 
 const Landing = () => {
+  const navigate = useNavigate();
+  const loginDemoUser = async () => {
+    const data = {
+      email: 'test@test.com',
+      password: 'secret123',
+    };
+
+    try {
+      await customFetch.post('/auth/login', data);
+      return navigate('/dashboard');
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return error?.response?.data?.message;
+      }
+      return error;
+    }
+  };
   return (
     <section className="relative p-10 px-20 max-xl:px-16 max-lg:px-12 max-md:px-8 h-screen bg-zinc-950 text-zinc-200 display-grid ">
       <nav className="w-full flex items-center justify-between justify-self-start">
@@ -43,13 +62,13 @@ const Landing = () => {
           </div>
 
           <div className="font-light h-max flex items-center gap-4 ">
-            <Link
-              to={'/login'}
+            <button
+              onClick={loginDemoUser}
               className="flex items-center gap-2 border border-white py-3 px-6 rounded-lg hover:text-light-gray hover:border-white text-white transition-colors duration-200"
             >
               <PlayIcon className="fill-transparent stroke-white h-4" />
               <p>Demo</p>
-            </Link>
+            </button>
             <Link
               to={'/register'}
               className="py-3 px-6 rounded-lg bg-light-purple text-dark-gray hover:bg-neutral-purple transition-colors duration-200"

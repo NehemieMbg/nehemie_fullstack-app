@@ -2,6 +2,7 @@ interface SelectProps {
   name: string;
   list: string[];
   defaultValue?: string;
+  label?: string;
   className?: string;
 }
 
@@ -10,15 +11,18 @@ const SelectForm: React.FC<SelectProps> = ({
   list,
   defaultValue = '',
   className,
+  label,
 }) => {
   return (
     <div className="w-full">
-      <label htmlFor={name}></label>
+      <label htmlFor={name} className="text-light-gray">
+        {label}
+      </label>
       <select
         name={name}
         id={name}
         defaultValue={defaultValue}
-        className={`w-full outline-none text-inherit font-roboto rounded-xl px-3 py-2 bg-inherit border border-zinc-900 bg-neutral-950 bg-opacity-50 font-light placeholder-neutral-500
+        className={`w-full bg-dark-gray p-2 rounded-md outline-none font-roboto placeholder-light-gray mt-1
 		${className}
 		`}
       >

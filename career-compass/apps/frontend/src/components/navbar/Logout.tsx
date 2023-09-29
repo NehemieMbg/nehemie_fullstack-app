@@ -34,8 +34,12 @@ const Logout = () => {
           </p>
         </div>
 
-        {user.image ? (
-          <img src="" alt="" className="h-8 w-8 aspect-square rounded-full" />
+        {user.avatar ? (
+          <img
+            src={user.avatar}
+            alt={'avatar'}
+            className="h-8 w-8 aspect-square rounded-full object-cover"
+          />
         ) : (
           <div
             className={`h-8 w-8 aspect-square rounded-full 
