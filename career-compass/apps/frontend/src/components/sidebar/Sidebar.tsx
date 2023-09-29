@@ -11,7 +11,11 @@ const Sidebar = () => {
   const pathname = pathArray[2] || '.';
 
   return (
-    <div className={'h-sidebar font-light p-8 z-30 w-full text-light-gray'}>
+    <div
+      className={
+        'fixed w-[204px] h-screen font-light p-8 z-30  text-light-gray'
+      }
+    >
       <LogoTwo isLightTheme={isLightTheme} />
 
       <div className="mt-14 flex flex-col justify-between h-full">

@@ -18,7 +18,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`w-full flex items-center justify-between font-roboto
+      className={`sticky top-0 p-8 max-md:p-4 bg-zinc-950 w-full flex items-center justify-between font-roboto
     `}
     >
       <div className="flex items-center gap-4">
@@ -34,7 +34,9 @@ const Navbar = () => {
           `}
           />
         </div>
-        <h2 className="text-xl font-ubuntu font-normal">{pathname}</h2>
+        <h2 className="text-xl max-lg:text-lg max-md:text-md font-ubuntu font-normal">
+          {pathname}
+        </h2>
       </div>
 
       <div className="relative flex items-center gap-4">

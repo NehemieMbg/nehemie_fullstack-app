@@ -93,7 +93,7 @@ const DashboardLayout = () => {
         `}
         ></div>
         <div
-          className={`h-screen  max-[1050px]:translate-x-[-100%] max-[1050px]:absolute transition-transform duration-200 w-[250px]  z-40
+          className={`h-screen  max-[1050px]:translate-x-[-100%] max-[1050px]:fixed transition-transform duration-200 w-[250px]  z-40
           ${isSidebar ? 'max-[1050px]:translate-x-[0px]' : ''}
           ${isLightTheme ? 'bg-cool-gray' : 'bg-zinc-950 '}
           `}
@@ -102,10 +102,10 @@ const DashboardLayout = () => {
           <Sidebar />
         </div>
 
-        <div className=" w-full p-8 max-lg:p-6 max-md:p-4">
+        <div className="relative w-full ">
           <Navbar />
 
-          <div className="py-[40px] font-light">
+          <div className=" p-8  max-lg:p-6 max-md:p-4 font-light py-[40px]">
             <Outlet context={{ user, isLightTheme }} />
           </div>
         </div>
