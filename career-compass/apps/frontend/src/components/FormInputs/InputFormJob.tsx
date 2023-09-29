@@ -1,4 +1,5 @@
 import { ExclamationCircleIcon } from '@heroicons/react/24/solid';
+import { useOutletContext } from 'react-router-dom';
 
 interface InputProps {
   type: string;
@@ -20,8 +21,10 @@ const InputFormJob: React.FC<InputProps> = ({
   error,
   className,
 }) => {
+  const { isLightTheme } = useOutletContext() as { isLightTheme: boolean };
+
   return (
-    <div className="w-full ">
+    <div className="w-full">
       <label htmlFor={name}></label>
       <input
         type={type}
@@ -30,8 +33,9 @@ const InputFormJob: React.FC<InputProps> = ({
         defaultValue={defaultValue}
         required={required}
         placeholder={placeholder}
-        className={`w-full outline-none text-inherit font-roboto rounded-xl px-3 py-2 bg-inherit border border-zinc-900 bg-neutral-950 bg-opacity-50 font-light placeholder-neutral-500
-        ${error ? 'border-red-500' : ` ${className}`} 
+        className={`w-full outline-none text-inherit font-roboto rounded-xl px-3 py-2 bg-inherit border  bg-neutral-950 bg-opacity-50 font-light placeholder-neutral-500
+		${isLightTheme ? 'bg-neutral-400 placeholder-slate-800' : 'text-white'}
+        ${error ? 'border-red-500' : ` ${className} border-transparent`} 
         `} // Using className as the else statement to add the red borders on error
       />
       {error && (

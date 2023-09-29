@@ -9,14 +9,17 @@ export const getCurrentUser = async (req, res) => {
 };
 
 export const getApplicationStats = async (req, res) => {
-  const users = await User.countDocuments();
+  const users = await User.find();
   const jobs = await Job.countDocuments(); // returns the number of jobs created
+  const adminUsers = users.filter((user) => user.role === 'admin');
 
   res.status(StatusCodes.OK).json({
     status: 'success',
     data: {
-      users,
       jobs,
+      numUser: users.length,
+      numAdmin: adminUsers.length,
+      users,
     },
   });
 };

@@ -39,9 +39,9 @@ const Job: React.FC<JobProps> = ({
   };
 
   return (
-    <div className="p-6 bg-dark-gray rounded-3xl font-roboto">
+    <div className="p-6 bg-dark-gray rounded-3xl font-roboto text-white">
       <header className="relative flex gap-4 border-b-[1px] border-b-zinc-700 pb-5 mb-4">
-        <div className="h-10 w-10 flex items-center justify-center bg-red-500 aspect-square rounded-2xl uppercase font-normal">
+        <div className="h-10 w-10 flex items-center justify-center bg-purple-500 aspect-square rounded-2xl uppercase font-normal">
           {company.charAt(0)}
         </div>
         <div className="leading-5">
@@ -85,7 +85,7 @@ const Job: React.FC<JobProps> = ({
           >
             Edit
           </Link>
-          <Form method="delete">
+          <Form method="post" action={`../delete-job/${_id}`}>
             <button
               type="submit"
               className="text-light-gray hover:text-red-500 transition-colors duration-200"

@@ -50,18 +50,11 @@ const AddJob = () => {
     if (typeof errors === 'string') setErrorInput(addJobError(errors));
   }, [errors]);
 
-  // Setting input styles
-  const inputClassName = `border-1 border-opacity-70 font-normal ${
-    isLightTheme
-      ? 'border-white placeholder-zinc-500'
-      : 'border-black placeholder-zinc-500'
-  }`;
-
   return (
-    <div className="py-8 w-full font-roboto">
+    <div className="py-8 w-full max-w-[680px] font-roboto">
       <div
-        className={`relative w-1/3 max-w-screen-wide rounded-3xl max-lg:rounded-2xl max-md-rounded-xl p-6 max-lg:p-6 max-md:p-4
-      ${isLightTheme ? 'bg-black text-white' : 'bg-dark-gray text-white'}
+        className={`relative w-full max-w-screen-wide rounded-3xl max-lg:rounded-2xl max-md-rounded-xl p-6 max-lg:p-6 max-md:p-4 bg-dark-gray text-white
+      ${isLightTheme ? '' : ''}
     `}
       >
         <Form method="post" action="" className="">
@@ -79,14 +72,14 @@ const AddJob = () => {
               type="text"
               name="position"
               placeholder="Position"
-              className={inputClassName}
+              className={''}
               error={errorInput.position}
             />
             <InputFormJob
               type="text"
               name="company"
               placeholder="Company"
-              className={inputClassName}
+              className={''}
               error={errorInput.company}
             />
             <InputFormJob
@@ -94,7 +87,7 @@ const AddJob = () => {
               name="jobLocation"
               placeholder="Job Location (e.g. Paris, France)"
               defaultValue={user.location}
-              className={inputClassName}
+              className={''}
               error={errorInput.jobLocation}
             />
           </div>
@@ -103,13 +96,13 @@ const AddJob = () => {
               name="jobStatus"
               defaultValue={JOB_STATUS.PENDING}
               list={Object.values(JOB_STATUS)}
-              className={inputClassName}
+              className={''}
             />
             <SelectFrom
               name="jobType"
               defaultValue={JOB_TYPE.FULL_TIME}
               list={Object.values(JOB_TYPE)}
-              className={inputClassName}
+              className={''}
             />
           </div>
           <div className="w-full">

@@ -9,3 +9,4 @@ export { default as ReviewSlider } from './animated/ReviewSlider';
 export { default as JobsContainer } from './jobs/JobsContainer';
 export { default as SearchContainer } from './search/SearchContainer';
 export { default as InputFormJob } from './FormInputs/InputFormJob';
+export { default as StatsItem } from './stats/StatsItem';
