@@ -9,4 +9,8 @@ export { default as ReviewSlider } from './animated/ReviewSlider';
 export { default as JobsContainer } from './jobs/JobsContainer';
 export { default as SearchContainer } from './search/SearchContainer';
 export { default as InputFormJob } from './FormInputs/InputFormJob';
+export { default as AreaChart } from './stats/AreaChart';
+export { default as BarChart } from './stats/BarChart';
+export { default as ChartContainer } from './stats/ChartContainer';
+export { default as StatsContainer } from './stats/StatsContainer';
 export { default as StatsItem } from './stats/StatsItem';

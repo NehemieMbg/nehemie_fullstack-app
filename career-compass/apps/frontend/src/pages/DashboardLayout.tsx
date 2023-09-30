@@ -25,6 +25,7 @@ const DashboardContext = createContext<DashboardContextType>({
     image: '',
     lastName: '',
     location: '',
+    avatar: '',
     _id: '',
     role: '',
   },
@@ -88,12 +89,12 @@ const DashboardLayout = () => {
       `}
       >
         <div
-          className={`fixed top-0 w-screen h-screen min-[1050px]:hidden bg-opacity-30 backdrop-blur-[2px] z-10
+          className={`fixed top-0 z-40 w-screen h-screen min-[1050px]:hidden bg-opacity-30 backdrop-blur-[2px]
         ${isSidebar ? 'bg-zinc-700' : 'hidden'}
         `}
         ></div>
         <div
-          className={`h-screen  max-[1050px]:translate-x-[-100%] max-[1050px]:fixed transition-transform duration-200 w-[250px]  z-40
+          className={`h-screen max-[1050px]:translate-x-[-100%] max-[1050px]:fixed transition-transform duration-200 w-[224px]  z-40
           ${isSidebar ? 'max-[1050px]:translate-x-[0px]' : ''}
           ${isLightTheme ? 'bg-cool-gray' : 'bg-zinc-950 '}
           `}
