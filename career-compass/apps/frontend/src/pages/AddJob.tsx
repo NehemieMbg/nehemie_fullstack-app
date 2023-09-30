@@ -53,11 +53,11 @@ const AddJob = () => {
   return (
     <div className=" w-full font-roboto">
       <div
-        className={`mx-auto relative w-full max-w-screen-wide rounded-3xl max-lg:rounded-2xl max-md-rounded-xl text-white
+        className={`mx-auto relative w-full max-w-screen-wide rounded-3xl max-lg:rounded-2xl max-md-rounded-xl 
       ${isLightTheme ? '' : ''}
     `}
       >
-        <h4 className="mb-6 text-xl font-ubuntu max-md:text-lg">
+        <h4 className="mb-6 text-xl font-normal font-ubuntu max-md:text-lg">
           Submit Details of a New Application
         </h4>
 
@@ -108,7 +108,9 @@ const AddJob = () => {
           </div>
           <div className="w-full flex">
             <button
-              className={`ml-auto py-1 px-3 transition-colors duration-200 text-purple-400 bg-opacity-50  hover:bg-opacity-70 `}
+              className={`ml-auto py-1 px-3 transition-colors duration-200 font-light bg-opacity-50  hover:bg-opacity-70
+              ${isLightTheme ? 'text-purple-700' : 'text-purple-400'}
+              `}
               disabled={isSubmitting}
             >
               {isSubmitting ? 'Submitting' : 'Add Job'}

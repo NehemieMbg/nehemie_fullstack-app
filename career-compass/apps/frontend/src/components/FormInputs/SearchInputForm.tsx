@@ -31,9 +31,18 @@ const SearchInputForm: React.FC<InputProps> = ({
 
   return (
     <div className="relative w-full">
-      <label htmlFor={name} className="text-light-gray"></label>
+      <label
+        htmlFor={name}
+        className={`text-light-gray
+        ${isLightTheme ? 'text-neutral-700' : ''}
+      `}
+      ></label>
       {!triggered && (
-        <MagnifyingGlassIcon className="absolute top-[15px] left-5 h-[19px] text-light-gray" />
+        <MagnifyingGlassIcon
+          className={`absolute top-[15px] left-5 h-[19px] text-light-gray
+        ${isLightTheme ? 'text-neutral-700' : ''}
+        `}
+        />
       )}
       <input
         type={type}
@@ -50,14 +59,14 @@ const SearchInputForm: React.FC<InputProps> = ({
         }}
         placeholder={`Search In Your applications`}
         className={`w-full bg-dark-gray p-2 px-4 rounded-md outline-none font-roboto placeholder-light-gray mt-1 placeholder:pl-8
-		${isLightTheme ? '' : ''}
+        ${isLightTheme ? 'bg-neutral-300 placeholder:text-neutral-700' : ''}
         ${error ? 'border-red-500' : ` ${className} border-transparent`} 
         `} // Using className as the else statement to add the red borders on error
       />
       {error && (
         <p className="flex gap-2 font-roboto font-light px-2 mt-2 text-red-500">
           <span>
-            <ExclamationCircleIcon className="h-5 mt-[1px]" />
+            <ExclamationCircleIcon className={`h-5 mt-[1px]`} />
           </span>
           {error}
         </p>

@@ -15,7 +15,7 @@ const JobsContainer = () => {
   return (
     <div className="w-full">
       <div className="max-w-screen-wide mx-auto">
-        <h4 className="mb-6 text-xl font-ubuntu max-md:text-lg">
+        <h4 className="mb-6 text-xl font-normal font-ubuntu max-md:text-lg">
           {totalJobs} job{jobs.length > 1 && 's'} found.
         </h4>
         <div className=" grid grid-cols-3 gap-6 max-[1350px]:grid-cols-2 max-[800px]:grid-cols-1 mb-12">

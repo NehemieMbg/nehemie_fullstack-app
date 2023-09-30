@@ -1,10 +1,11 @@
-import { Form, useSubmit, Link } from 'react-router-dom';
+import { Form, useSubmit, Link, useOutletContext } from 'react-router-dom';
 import { JOB_TYPE, JOB_STATUS, JOB_SORT_BY } from '../../constants';
 import { useAllJobsContext } from '../../pages/AllJobs';
 import { SearchInputForm } from '..';
 import SelectForm from '../FormInputs/SelectForm';
 
 const SearchContainer = () => {
+  const { isLightTheme } = useOutletContext() as { isLightTheme: boolean };
   // Getting searchValues from AllJobsContext
   // to avoid reset to default values when reloading the page
   const { searchValues } = useAllJobsContext();
@@ -24,7 +25,7 @@ const SearchContainer = () => {
   const submit = useSubmit(); // react-router-dom to submit form with query params
   return (
     <div className="max-w-screen-wide mx-auto mb-12">
-      <h4 className="mb-6 text-xl font-ubuntu max-md:text-lg">
+      <h4 className="mb-6 text-xl font-normal font-ubuntu max-md:text-lg">
         My Applications
       </h4>
       <Form>
@@ -70,7 +71,9 @@ const SearchContainer = () => {
           />
           <Link
             to="/dashboard/all-jobs"
-            className="col-start-3 justify-self-end text-base font-roboto font-light text-light-gray hover:text-white transition-colors duration-200"
+            className={`col-start-3 justify-self-end text-base font-roboto font-light text-light-gray hover:text-white transition-colors duration-200
+            ${isLightTheme ? 'text-neutral-700' : ''}
+            `}
           >
             Reset search
           </Link>

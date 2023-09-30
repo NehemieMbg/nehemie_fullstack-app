@@ -8,7 +8,8 @@ const Navbar = () => {
 
   return (
     <div
-      className={`sticky top-0 z-30 p-8 max-md:p-4 bg-zinc-950 w-full flex items-center justify-between font-roboto
+      className={`sticky top-0 z-30 p-8 max-md:p-4  w-full flex items-center justify-between font-roboto
+      ${isLightTheme ? 'bg-neutral-100' : 'bg-neutral-950'}
     `}
     >
       <div className="flex items-center gap-4">

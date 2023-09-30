@@ -1,3 +1,5 @@
+import { useOutletContext } from 'react-router-dom';
+
 interface SelectProps {
   name: string;
   list: string[];
@@ -15,9 +17,15 @@ const SelectForm: React.FC<SelectProps> = ({
   label,
   onChange,
 }) => {
+  const { isLightTheme } = useOutletContext() as { isLightTheme: boolean };
   return (
     <div className="w-full">
-      <label htmlFor={name} className="text-light-gray">
+      <label
+        htmlFor={name}
+        className={`text-light-gray
+        ${isLightTheme ? 'text-neutral-700' : ''}
+      `}
+      >
         {label}
       </label>
       <select
@@ -26,6 +34,7 @@ const SelectForm: React.FC<SelectProps> = ({
         onChange={onChange}
         defaultValue={defaultValue}
         className={`w-full bg-dark-gray p-2 rounded-md outline-none font-roboto placeholder-light-gray mt-1
+        ${isLightTheme ? 'bg-neutral-300' : ''}
 		${className}
 		`}
       >

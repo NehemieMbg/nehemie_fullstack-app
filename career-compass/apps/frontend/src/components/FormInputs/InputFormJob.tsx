@@ -28,7 +28,12 @@ const InputFormJob: React.FC<InputProps> = ({
 
   return (
     <div className="w-full">
-      <label htmlFor={name} className="text-light-gray">
+      <label
+        htmlFor={name}
+        className={`text-light-gray
+        ${isLightTheme ? 'text-neutral-700' : ''}
+      `}
+      >
         {label}
       </label>
       <input
@@ -40,8 +45,8 @@ const InputFormJob: React.FC<InputProps> = ({
         onChange={onChange}
         placeholder={placeholder}
         className={`w-full bg-dark-gray p-2 rounded-md outline-none font-roboto placeholder-light-gray mt-1
-		${isLightTheme ? '' : ''}
-        ${error ? 'border-red-500' : ` ${className} border-transparent`} 
+		${isLightTheme ? 'bg-neutral-300' : ''}
+        ${error ? 'border border-red-500' : ` ${className} border-transparent`} 
         `} // Using className as the else statement to add the red borders on error
       />
       {error && (

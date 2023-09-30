@@ -1,4 +1,4 @@
-import { Link, Form } from 'react-router-dom';
+import { Link, Form, useOutletContext } from 'react-router-dom';
 import dayjs from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 import JobInfo from './JobInfo';
@@ -30,6 +30,7 @@ const Job: React.FC<JobProps> = ({
   createdAt,
   jobStatus,
 }) => {
+  const { isLightTheme } = useOutletContext() as { isLightTheme: boolean };
   const date = dayjs(createdAt).format('MMM Do YYYY');
 
   const statusStyle = (jobStatus: string) => {
@@ -39,7 +40,11 @@ const Job: React.FC<JobProps> = ({
   };
 
   return (
-    <div className="p-6 bg-dark-gray rounded-3xl font-roboto text-white">
+    <div
+      className={`p-6 bg-dark-gray rounded-3xl font-roboto
+    ${isLightTheme ? 'bg-neutral-300' : ''}
+    `}
+    >
       <header className="relative flex gap-4 border-b-[1px] border-b-zinc-700 pb-5 mb-4">
         <div className="h-10 w-10 flex items-center justify-center bg-purple-500 aspect-square rounded-2xl uppercase font-normal">
           {company.charAt(0)}

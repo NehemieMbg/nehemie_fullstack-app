@@ -85,7 +85,7 @@ const DashboardLayout = () => {
     >
       <main
         className={`flex gap-4 max-[1050px]:gap-0 w-screen min-h-screen
-      ${isLightTheme ? 'bg-cool-gray text-black' : 'bg-zinc-950 '}
+      ${isLightTheme ? 'bg-neutral-100 text-black' : 'bg-neutral-950 '}
       `}
       >
         <div
@@ -96,7 +96,7 @@ const DashboardLayout = () => {
         <div
           className={`h-screen max-[1050px]:translate-x-[-100%] max-[1050px]:fixed transition-transform duration-200 w-[224px]  z-40
           ${isSidebar ? 'max-[1050px]:translate-x-[0px]' : ''}
-          ${isLightTheme ? 'bg-cool-gray' : 'bg-zinc-950 '}
+          ${isLightTheme ? 'bg-neutral-100' : 'bg-neutral-950 '}
           `}
           ref={sidebarRef}
         >

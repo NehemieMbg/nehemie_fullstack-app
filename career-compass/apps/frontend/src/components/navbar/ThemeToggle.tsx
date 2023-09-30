@@ -7,7 +7,7 @@ const ThemeToggle = () => {
   return (
     <div className="cursor-pointer" onClick={toggleDarkTheme}>
       {isLightTheme ? (
-        <MoonIcon className="h-5 fill-black hover:fill-light-gray transition-colors duration-200" />
+        <MoonIcon className="h-5 fill-neutral-500 hover:fill-neutral-950 transition-colors duration-200" />
       ) : (
         <SunIcon className="h-6 fill-light-gray hover:fill-white transition-colors duration-200" />
       )}

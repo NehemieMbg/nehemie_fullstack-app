@@ -43,7 +43,9 @@ const Profile = () => {
         encType="multipart/form-data"
         className="max-w-screen-wide mx-auto"
       >
-        <h4 className="mb-6 text-xl font-ubuntu max-md:text-lg">My Profile</h4>
+        <h4 className="mb-6 text-xl font-normal font-ubuntu max-md:text-lg">
+          My Profile
+        </h4>
 
         <div className="w-max flex items-center gap-6 mb-8">
           {user.avatar ? (
