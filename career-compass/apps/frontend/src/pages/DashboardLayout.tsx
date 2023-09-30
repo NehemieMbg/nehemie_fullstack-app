@@ -89,8 +89,8 @@ const DashboardLayout = () => {
       `}
       >
         <div
-          className={`fixed top-0 z-40 w-screen h-screen min-[1050px]:hidden bg-opacity-30 backdrop-blur-[2px]
-        ${isSidebar ? 'bg-zinc-700' : 'hidden'}
+          className={`fixed top-0 z-40 w-screen h-screen min-[1050px]:hidden bg-opacity-20 backdrop-blur-[3px]
+        ${isSidebar ? 'bg-neutral-950' : 'hidden'}
         `}
         ></div>
         <div

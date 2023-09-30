@@ -4,6 +4,7 @@ interface SelectProps {
   defaultValue?: string;
   label?: string;
   className?: string;
+  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const SelectForm: React.FC<SelectProps> = ({
@@ -12,6 +13,7 @@ const SelectForm: React.FC<SelectProps> = ({
   defaultValue = '',
   className,
   label,
+  onChange,
 }) => {
   return (
     <div className="w-full">
@@ -21,6 +23,7 @@ const SelectForm: React.FC<SelectProps> = ({
       <select
         name={name}
         id={name}
+        onChange={onChange}
         defaultValue={defaultValue}
         className={`w-full bg-dark-gray p-2 rounded-md outline-none font-roboto placeholder-light-gray mt-1
 		${className}
