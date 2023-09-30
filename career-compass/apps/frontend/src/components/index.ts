@@ -15,3 +15,4 @@ export { default as ChartContainer } from './stats/ChartContainer';
 export { default as StatsContainer } from './stats/StatsContainer';
 export { default as StatsItem } from './stats/StatsItem';
 export { default as SearchInputForm } from './FormInputs/SearchInputForm';
+export { default as PageBtnContainer } from './pagination/PageBtnContainer';

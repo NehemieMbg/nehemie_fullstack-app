@@ -1,7 +1,7 @@
 import { Form, useSubmit, Link } from 'react-router-dom';
 import { JOB_TYPE, JOB_STATUS, JOB_SORT_BY } from '../../constants';
 import { useAllJobsContext } from '../../pages/AllJobs';
-import { InputFormJob, SearchInputForm } from '..';
+import { SearchInputForm } from '..';
 import SelectForm from '../FormInputs/SelectForm';
 
 const SearchContainer = () => {

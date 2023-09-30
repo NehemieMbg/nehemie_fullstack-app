@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import { useDashboardContext } from '../../pages/DashboardLayout';
 import { useLocation } from 'react-router-dom';
 import links from '../../utils/links';
+import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/solid';
 
 const Sidebar = () => {
-  const { toggleSideBar, isLightTheme, user } = useDashboardContext();
+  const { toggleSideBar, isLightTheme, user, logoutUser } =
+    useDashboardContext();
   const location = useLocation();
   const pathArray = location.pathname.split('/');
   const pathname = pathArray[2] || '.';
@@ -14,7 +16,7 @@ const Sidebar = () => {
     <>
       <div
         className={
-          'fixed w-[224px] h-screen font-light p-8 z-30  text-light-gray'
+          'fixed w-[224px] h-sidebar font-light p-8 z-30  text-light-gray'
         }
       >
         <LogoTwo isLightTheme={isLightTheme} />
@@ -45,6 +47,16 @@ const Sidebar = () => {
               );
             })}
           </div>
+          <Link
+            to={''}
+            className={`flex items-center gap-2 hover:bg-zinc-900 hover:text-white transition-colors duration-200 py-2 px-3 rounded-xl
+            ${isLightTheme ? 'hover:bg-zinc-800' : ''}
+            `}
+            onClick={logoutUser}
+          >
+            <ArrowRightOnRectangleIcon className="h-5" />
+            <p>Log out</p>
+          </Link>
         </div>
       </div>
     </>

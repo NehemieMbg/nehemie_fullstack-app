@@ -57,44 +57,39 @@ const AddJob = () => {
       ${isLightTheme ? '' : ''}
     `}
       >
+        <h4 className="mb-6 text-xl font-ubuntu max-md:text-lg">
+          Submit Details of a New Application
+        </h4>
+
         <Form
           method="post"
           action=""
-          className="w-full flex gap-x-80 max-[1271px]:gap-x-56 max-[900px]:flex-col"
+          className="w-full gap-x-80 max-[1271px]:gap-x-56 max-[900px]:flex-col"
         >
-          <h4
-            className={` font-light text-2xl mb-8 max-lg:text-xl max-lg:mb-6 
-          `}
-          >
-            Submit Details of a New Application
-          </h4>
-
-          <div className="w-full max-w-[580px]  max-[900px]:max-w-[100%]">
-            <div className="mb-4 flex flex-col gap-2">
-              <InputFormJob
-                type="text"
-                name="position"
-                label="Position"
-                className={''}
-                error={errorInput.position}
-              />
-              <InputFormJob
-                type="text"
-                name="company"
-                label="Company"
-                className={''}
-                error={errorInput.company}
-              />
-              <InputFormJob
-                type="text"
-                name="jobLocation"
-                label="Job Location (e.g. Paris, France)"
-                defaultValue={user.location}
-                className={''}
-                error={errorInput.jobLocation}
-              />
-            </div>
-            <div className="flex gap-2 mb-6">
+          <div className="grid grid-cols-2 max-[720px]:grid-cols-1 mb-4 gap-2 gap-y-3">
+            <InputFormJob
+              type="text"
+              name="position"
+              label="Position"
+              className={''}
+              error={errorInput.position}
+            />
+            <InputFormJob
+              type="text"
+              name="company"
+              label="Company"
+              className={''}
+              error={errorInput.company}
+            />
+            <InputFormJob
+              type="text"
+              name="jobLocation"
+              label="Job Location (e.g. Paris, France)"
+              defaultValue={user.location}
+              className={''}
+              error={errorInput.jobLocation}
+            />
+            <div className="flex gap-2 mb-2">
               <SelectFrom
                 name="jobStatus"
                 defaultValue={JOB_STATUS.PENDING}
@@ -110,14 +105,14 @@ const AddJob = () => {
                 className={''}
               />
             </div>
-            <div className="w-full flex">
-              <button
-                className={`ml-auto py-1 px-3 transition-colors duration-200 text-purple-400 bg-opacity-50  hover:bg-opacity-70 `}
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Submitting' : 'Add Job'}
-              </button>
-            </div>
+          </div>
+          <div className="w-full flex">
+            <button
+              className={`ml-auto py-1 px-3 transition-colors duration-200 text-purple-400 bg-opacity-50  hover:bg-opacity-70 `}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Submitting' : 'Add Job'}
+            </button>
           </div>
         </Form>
       </div>
