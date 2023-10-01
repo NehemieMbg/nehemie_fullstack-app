@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import cloudinary from 'cloudinary';
+import cors from 'cors';
 const app = express();
 
 // Routers
@@ -33,6 +34,12 @@ import { authenticateUser } from './middleware/authMiddleware.js';
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev')); // To log info about requests
 }
+
+app.use(
+  cors({
+    origin: 'https://career-compass-client.vercel.app/',
+  })
+);
 
 // allow access to public folder to get images
 app.use(express.static(path.resolve(__dirname, './public')));
