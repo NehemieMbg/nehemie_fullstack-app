@@ -37,13 +37,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // allow access to public folder to get images
-// app.use(express.static(path.resolve(__dirname, './public')));
+app.use(express.static(path.resolve(__dirname, './public')));
 
-// Access to XMLHttpRequest. TO enable CORS policy (axios requests)
-// Use this before your routes
-app.use(cors());
-// Set security http headers
-app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cookieParser());
 app.use(express.json());
 
