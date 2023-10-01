@@ -64,8 +64,8 @@ const DashboardLayout = () => {
   };
 
   const logoutUser = async () => {
-    navigate('/');
     await customFetch.get('/auth/logout');
+    navigate('/');
   };
 
   useClickOutside(sidebarRef, () => setSidebar(false));

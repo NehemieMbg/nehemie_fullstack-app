@@ -44,6 +44,8 @@ export const login = async (req, res) => {
     expires: new Date(Date.now() + oneDay),
     // secure: process.env.NODE_ENV === 'production', // To use https on production
     secure: true,
+    sameSite: 'none',
+    path: '/',
   });
   res.status(StatusCodes.OK).json({ msg: 'User logged in' });
 };
@@ -54,6 +56,8 @@ export const logout = (req, res) => {
     secure: true,
     httpOnly: true,
     expires: new Date(Date.now()), // Expires immediately to logout the user
+    sameSite: 'none',
+    path: '/',
   });
   res.status(StatusCodes.OK).json({ message: 'User logged out' });
 };
