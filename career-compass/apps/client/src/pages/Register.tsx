@@ -1,18 +1,18 @@
 import {
-  Link,
   Form,
   redirect,
   useNavigation,
-  useActionData,
+  Link,
   ActionFunctionArgs,
+  useActionData,
 } from 'react-router-dom';
 import InputForm from '../components/FormInputs/InputForm';
 import Logo from '../components/Logo';
 import ReviewSlider from '../components/animated/ReviewSlider';
 import PasswordInputForm from '../components/FormInputs/PasswordInputForm';
 import customFetch from '../utils/customFetch';
+import { registerError } from '../utils/errorInput';
 import { AxiosError } from 'axios';
-import { loginError } from '../utils/errorInput';
 import { useEffect, useState } from 'react';
 import useSession from '../hooks/useSession';
 
@@ -21,9 +21,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const data = Object.fromEntries(formData); // transform FormData into regular object
 
   try {
-    await customFetch.post('/auth/login', data);
+    await customFetch.post('/auth/register', data);
     return redirect('/dashboard');
-  } catch (error) {
+  } catch (error: unknown) {
     if (error instanceof AxiosError) {
       return error?.response?.data?.message;
     }
@@ -31,26 +31,28 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   }
 };
 
-const Login = () => {
+const Register = () => {
   const errors = useActionData();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
-
   useSession();
 
   // managing errors
   const [errorInput, setErrorInput] = useState({
+    name: '',
+    lastName: '',
     email: '',
+    location: '',
     password: '',
-    invalidCredentials: '',
+    passwordConfirm: '',
   });
 
   useEffect(() => {
-    if (typeof errors === 'string') setErrorInput(loginError(errors));
+    if (typeof errors === 'string') setErrorInput(registerError(errors));
   }, [errors]);
 
   return (
-    <section className=" h-screen grid grid-cols-2 gap-8 text-white font-light p-10 max-xl:px-16 max-lg:px-12 max-md:px-8 max-w-screen-wide w-full mx-auto max-[1350px]:grid-cols-1 ">
+    <section className=" h-screen grid grid-cols-2 gap-8 text-white font-light p-10 max-xl:px-16 max-lg:px-12 max-md:px-8 max-w-screen-wide w-full mx-auto max-[1350px]:grid-cols-1">
       <div className="bg-[url('/images/wallpaper/dark-sand.jpg')] bg-cover w-full  rounded-3xl overflow-hidden max-[1350px]:hidden">
         <div className="flex flex-col items-center justify-center h-full bg-zinc-950 bg-opacity-20    backdrop-blur-md">
           <div className="">
@@ -76,43 +78,69 @@ const Login = () => {
       <div className="flex flex-col items-center justify-center">
         <Form
           method="post"
-          action=""
           className="flex flex-col items-center gap-4 w-full max-w-[300px]"
         >
           <div>
             <Logo className="flex-col gap-0 " />
-            <p className="mb-2 text-light-gray">Log into your account</p>
+            <p className="mb-2 text-light-gray">Register your account</p>
           </div>
+          <InputForm
+            type="text"
+            name="name"
+            placeholder="Name"
+            required={true}
+            error={errorInput.name}
+          />
+          <InputForm
+            type="text"
+            name="lastName"
+            placeholder="Last Name"
+            required={true}
+            error={errorInput.lastName}
+          />
           <InputForm
             type="email"
             name="email"
-            defaultValue="test@gmail.com"
             placeholder="Email"
-            required={false}
-            error={errorInput.email || errorInput.invalidCredentials}
+            required={true}
+            error={errorInput.email}
+          />
+          <InputForm
+            type="text"
+            name="location"
+            placeholder="Location"
+            required={true}
+            error={errorInput.location}
           />
           <PasswordInputForm
             type="password"
             name="password"
-            defaultValue="test1234"
             placeholder="Password"
-            required={false}
-            error={errorInput.password || errorInput.invalidCredentials}
+            required={true}
+            error={errorInput.password}
           />
-          <p className="text-sm">Forgot password ?</p>
+          <PasswordInputForm
+            type="password"
+            name="passwordConfirm"
+            placeholder="Password Confirmation"
+            required={true}
+            error={errorInput.passwordConfirm}
+          />
+
+          {/* <p className="text-sm">Forgot password ?</p> */}
           <button
             className="bg-light-purple w-full py-3 px-4 rounded-2xl font-roboto font-normal hover:bg-neutral-purple transition-colors duration-200 text-dark-gray"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Submitting' : 'Login'}
+            {isSubmitting ? 'Submitting...' : 'Sign Up'}
           </button>
           <div className="flex gap-2 text-sm text-light-gray mt-8">
-            <p>Don't have an account yet ?</p>
+            <p>Already have an account ?</p>
             <Link
-              to={'/register'}
+              to={'/login'}
               className="font-normal text-white hover:text-light-gray transition-colors duration-100"
             >
-              Sign up
+              Log In
             </Link>
           </div>
         </Form>
@@ -120,4 +148,4 @@ const Login = () => {
     </section>
   );
 };
-export default Login;
+export default Register;
