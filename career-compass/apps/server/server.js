@@ -12,7 +12,6 @@ const app = express();
 app.use(
   cors({
     origin: 'https://career-compass-client.vercel.app/',
-    credentials: true,
   })
 );
 
