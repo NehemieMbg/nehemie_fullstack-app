@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // allow access to public folder to get images
-app.use(express.static(path.resolve(__dirname, './public')));
+// app.use(express.static(path.resolve(__dirname, './public')));
 
 app.use(cookieParser());
 app.use(express.json());
