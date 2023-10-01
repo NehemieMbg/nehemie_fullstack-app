@@ -1,7 +1,8 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 import { useAllJobsContext } from '../../pages/AllJobs';
 
 const PageBtnContainer = () => {
+  const { isLightTheme } = useOutletContext() as { isLightTheme: boolean };
   const {
     data: { numOfPages, currentPage },
   } = useAllJobsContext();
@@ -21,9 +22,17 @@ const PageBtnContainer = () => {
       <button
         key={pageNumber}
         onClick={() => handlePageChange(pageNumber)}
-        className={`${
+        className={` hover:text-white w-8 rounded-full aspect-square transition-colors duration-200
+        ${
+          isLightTheme
+            ? 'hover:bg-neutral-950'
+            : 'hover:bg-neutral-300 hover:text-black'
+        }
+        ${
           activeClass &&
-          'bg-white text-neutral-950 w-7 rounded-full aspect-square max-md:w-6'
+          ` text-neutral-950  max-md:w-6
+            ${isLightTheme ? 'bg-neutral-950 text-white' : 'bg-neutral-300 '}
+          `
         }`}
       >
         {pageNumber}
@@ -39,7 +48,11 @@ const PageBtnContainer = () => {
     );
 
     if (currentPage > 3) {
-      pageButtons.push(<span key={'dots-prev'}>...</span>);
+      pageButtons.push(
+        <span key={'dots-prev'} className="max-md:hidden">
+          ...
+        </span>
+      );
     }
 
     // one page before current page
@@ -72,7 +85,11 @@ const PageBtnContainer = () => {
     }
 
     if (currentPage < numOfPages - 2) {
-      pageButtons.push(<span key={'dots-next'}>...</span>);
+      pageButtons.push(
+        <span key={'dots-next'} className="max-md:hidden">
+          ...
+        </span>
+      );
     }
 
     // last page
@@ -87,8 +104,11 @@ const PageBtnContainer = () => {
   };
 
   return (
-    <div className="flex gap-5 max-md:text-sm">
+    <div className="flex gap-5 max-md:gap-2 max-md:text-sm">
       <button
+        className={` p-1 px-2 rounded-lg transition-colors duration-200
+          ${isLightTheme ? 'hover:bg-neutral-300' : 'hover:bg-neutral-800'}
+        `}
         onClick={() => {
           let prevPage = currentPage - 1;
           if (prevPage < 1) prevPage = 1;
@@ -99,6 +119,9 @@ const PageBtnContainer = () => {
       </button>
       {renderPageButtons()}
       <button
+        className={` p-1 px-2 rounded-lg transition-colors duration-200
+              ${isLightTheme ? 'hover:bg-neutral-300' : 'hover:bg-neutral-800'}
+            `}
         onClick={() => {
           let nextPage = currentPage + 1;
           if (nextPage > numOfPages) nextPage = 1;

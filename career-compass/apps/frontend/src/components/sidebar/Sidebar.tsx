@@ -15,9 +15,9 @@ const Sidebar = () => {
   return (
     <>
       <div
-        className={
-          'fixed w-[224px] h-sidebar font-light p-8 z-30  text-light-gray'
-        }
+        className={`fixed w-[224px] h-sidebar font-light p-8 z-30  text-light-gray 
+          ${isLightTheme ? 'text-neutral-900' : ''}
+        `}
       >
         <LogoTwo isLightTheme={isLightTheme} />
 
@@ -30,14 +30,20 @@ const Sidebar = () => {
                 <Link
                   to={link.path}
                   key={link.path}
-                  className={`flex items-center gap-2  hover:bg-zinc-900 hover:text-white transition-colors duration-200 py-2 px-3 rounded-xl
-              ${link.path === pathname ? 'text-white' : ''}
-              ${isLightTheme ? 'bg-cool-gray text-black' : 'bg-zinc-950 '}
+                  className={`flex items-center gap-2  hover:bg-neutral-800 hover:text-white transition-colors duration-200 py-2 px-3 rounded-xl
               ${
-                isLightTheme && link.path === pathname
-                  ? 'bg-zinc-900 text-zinc-100'
+                link.path === pathname && !isLightTheme
+                  ? 'text-white bg-neutral-800'
                   : ''
               }
+
+              ${
+                isLightTheme && link.path === pathname
+                  ? 'bg-neutral-300 text-black'
+                  : ''
+              }
+
+              ${isLightTheme ? 'hover:bg-neutral-300 hover:text-black' : ''}
               `}
                   onClick={toggleSideBar}
                 >
@@ -50,7 +56,7 @@ const Sidebar = () => {
           <Link
             to={''}
             className={`flex items-center gap-2 hover:bg-zinc-900 hover:text-white transition-colors duration-200 py-2 px-3 rounded-xl
-            ${isLightTheme ? 'hover:bg-zinc-800' : ''}
+            ${isLightTheme ? 'hover:bg-neutral-300 hover:text-black' : ''}
             `}
             onClick={logoutUser}
           >

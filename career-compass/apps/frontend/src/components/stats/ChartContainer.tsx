@@ -23,8 +23,8 @@ const ChartContainer: React.FC<ChartContainerProps> = ({ data }) => {
         <button
           type="button"
           onClick={() => setBarChart((prev) => !prev)}
-          className={`ml-6 text-sm font-normal bg-neutral-950 w-max flex gap-2 p-1 rounded-full font-ubuntu mb-6
-    ${isLightTheme ? 'bg-neutral-400' : ''}
+          className={`ml-6 text-sm font-normal  w-max flex gap-2 p-1 rounded-full font-ubuntu mb-6
+    ${isLightTheme ? 'bg-neutral-400' : 'bg-neutral-950'}
           `}
         >
           {/* {barChart ? 'Bar Chart' : 'Area Chart'} */}

@@ -1,8 +1,10 @@
 import { useAllJobsContext } from '../../pages/AllJobs';
 import { PageBtnContainer } from '..';
 import Job from './Job';
+import { useOutletContext } from 'react-router-dom';
 
 const JobsContainer = () => {
+  const { isLightTheme } = useOutletContext() as { isLightTheme: boolean };
   const { data } = useAllJobsContext() as any;
   const { totalJobs, numOfPages } = data;
 
@@ -23,7 +25,7 @@ const JobsContainer = () => {
             <Job key={job._id} {...job} />
           ))}
         </div>
-        <div className="w-full flex md:justify-end justify-center">
+        <div className="w-full flex md:justify-end justify-center font-normal">
           {numOfPages > 1 && <PageBtnContainer />}
         </div>
       </div>

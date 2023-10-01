@@ -24,7 +24,7 @@ const SearchContainer = () => {
 
   const submit = useSubmit(); // react-router-dom to submit form with query params
   return (
-    <div className="max-w-screen-wide mx-auto mb-12">
+    <div className="max-w-screen-wide mx-auto mb-12 font-normal">
       <h4 className="mb-6 text-xl font-normal font-ubuntu max-md:text-lg">
         My Applications
       </h4>
@@ -71,8 +71,8 @@ const SearchContainer = () => {
           />
           <Link
             to="/dashboard/all-jobs"
-            className={`col-start-3 justify-self-end text-base font-roboto font-light text-light-gray hover:text-white transition-colors duration-200
-            ${isLightTheme ? 'text-neutral-700' : ''}
+            className={`col-start-3 justify-self-end text-base font-roboto text-light-gray hover:text-white transition-colors duration-200 font-normal
+            ${isLightTheme ? 'text-neutral-600 hover:text-black ' : ''}
             `}
           >
             Reset search

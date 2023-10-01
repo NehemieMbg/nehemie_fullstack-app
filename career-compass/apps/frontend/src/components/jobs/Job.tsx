@@ -34,9 +34,18 @@ const Job: React.FC<JobProps> = ({
   const date = dayjs(createdAt).format('MMM Do YYYY');
 
   const statusStyle = (jobStatus: string) => {
-    if (jobStatus === 'pending') return 'text-orange-400 bg-orange-400';
-    else if (jobStatus === 'interview') return 'bg-green-400 text-green-400';
-    else if (jobStatus === 'declined') return 'text-red-400 bg-red-500';
+    if (jobStatus === 'pending')
+      return isLightTheme
+        ? 'text-orange-700 bg-orange-600'
+        : 'text-orange-400 bg-orange-400';
+    else if (jobStatus === 'interview')
+      return isLightTheme
+        ? 'bg-green-600 text-green-700'
+        : 'bg-green-400 text-green-400';
+    else if (jobStatus === 'declined')
+      return isLightTheme
+        ? 'text-red-600 bg-red-700'
+        : 'text-red-400 bg-red-500';
   };
 
   return (

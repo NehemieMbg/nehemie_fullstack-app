@@ -32,7 +32,11 @@ const UserItem: React.FC<UserProps> = ({ user }) => {
             className="w-14 h-14 aspect-square rounded-full object-cover object-center"
           />
         ) : (
-          <div className="w-14 h-14  bg-neutral-700 rounded-full aspect-square"></div>
+          <div
+            className={`w-14 h-14   rounded-full aspect-square
+            ${isLightTheme ? 'bg-neutral-400' : 'bg-neutral-700'}
+          `}
+          ></div>
         )}
         <div className="leading-5">
           <p className="text-base font-normal">
