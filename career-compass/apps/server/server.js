@@ -39,6 +39,9 @@ app.use(cors());
 app.use(
   cors({
     origin: 'https://career-compass-client.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
   })
 );
 
