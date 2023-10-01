@@ -11,13 +11,13 @@ const SearchContainer = () => {
   const { searchValues } = useAllJobsContext();
   const { search, jobStatus, jobType, sort } = searchValues;
 
-  const debounce = (onChange) => {
-    let timeout;
-    return (e) => {
+  const debounce = (onChange: (form: HTMLFormElement) => void) => {
+    let timeout: NodeJS.Timeout;
+    return (e: React.FormEvent<HTMLInputElement>) => {
       const form = e.currentTarget.form;
       clearTimeout(timeout);
       timeout = setTimeout(() => {
-        onChange(form);
+        if (form) onChange(form);
       }, 1000);
     };
   };
@@ -34,7 +34,7 @@ const SearchContainer = () => {
             type="search"
             name="search"
             defaultValue={search}
-            onChange={debounce((form) => {
+            onChange={debounce((form: HTMLFormElement) => {
               submit(form);
             })}
           />
