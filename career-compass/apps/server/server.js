@@ -6,6 +6,8 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import cloudinary from 'cloudinary';
+import cors from 'cors';
+import helmet from 'helmet';
 const app = express();
 
 // Routers
@@ -37,6 +39,11 @@ if (process.env.NODE_ENV === 'development') {
 // allow access to public folder to get images
 // app.use(express.static(path.resolve(__dirname, './public')));
 
+// Access to XMLHttpRequest. TO enable CORS policy (axios requests)
+app.use(cors());
+
+// Set security http headers
+app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cookieParser());
 app.use(express.json());
 
