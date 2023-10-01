@@ -41,12 +41,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // Access to XMLHttpRequest. TO enable CORS policy (axios requests)
 // Use this before your routes
-app.use(
-  cors({
-    origin: 'https://career-compass-client.vercel.app', // client's URL
-    credentials: true,
-  })
-);
+app.use(cors());
 // Set security http headers
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cookieParser());
