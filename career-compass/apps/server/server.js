@@ -43,13 +43,10 @@ if (process.env.NODE_ENV === 'development') {
 // Use this before your routes
 app.use(
   cors({
-    origin: 'https://career-compass-client.vercel.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Methods to allow
-    allowedHeaders: ['Content-Type', 'Authorization'], // Headers allowed
-    credentials: true, // This allows cookies to be sent with the request
+    origin: 'https://career-compass-client.vercel.app', // client's URL
+    credentials: true,
   })
 );
-
 // Set security http headers
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cookieParser());
