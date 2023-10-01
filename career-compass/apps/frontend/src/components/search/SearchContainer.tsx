@@ -12,7 +12,7 @@ const SearchContainer = () => {
   const { search, jobStatus, jobType, sort } = searchValues;
 
   const debounce = (onChange: (form: HTMLFormElement) => void) => {
-    let timeout: NodeJS.Timeout;
+    let timeout: ReturnType<typeof setTimeout>;
     return (e: React.FormEvent<HTMLInputElement>) => {
       const form = e.currentTarget.form;
       clearTimeout(timeout);
