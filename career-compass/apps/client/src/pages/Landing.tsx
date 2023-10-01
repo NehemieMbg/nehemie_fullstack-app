@@ -3,10 +3,8 @@ import { PlayIcon } from '@heroicons/react/24/solid';
 import Logo from '../components/Logo';
 import customFetch from '../utils/customFetch';
 import { AxiosError } from 'axios';
-import useSession from '../hooks/useSession';
 
 const Landing = () => {
-  useSession();
   const navigate = useNavigate();
   const loginDemoUser = async () => {
     const data = {

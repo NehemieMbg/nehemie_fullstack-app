@@ -11,6 +11,7 @@ const Sidebar = () => {
   const location = useLocation();
   const pathArray = location.pathname.split('/');
   const pathname = pathArray[2] || '.';
+  // const pathname = '/dashboard';
 
   return (
     <>
