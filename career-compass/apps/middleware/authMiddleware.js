@@ -19,6 +19,21 @@ export const authenticateUser = (req, res, next) => {
   }
 };
 
+export const checkUserSession = (req, res, next) => {
+  const { token } = req.cookies;
+  console.log('request done /login');
+
+  if (token) {
+    try {
+      verifyJWT(token);
+      return res.status(200).json({ message: 'User logged in' });
+    } catch (error) {
+      throw new UnauthenticatedError('User not logged in');
+    }
+  }
+  next();
+};
+
 export const authorizePermissions = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role))

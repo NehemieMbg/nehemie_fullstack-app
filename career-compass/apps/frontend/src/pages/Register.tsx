@@ -14,6 +14,7 @@ import customFetch from '../utils/customFetch';
 import { registerError } from '../utils/errorInput';
 import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
+import useSession from '../hooks/useSession';
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
@@ -21,7 +22,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   try {
     await customFetch.post('/auth/register', data);
-    return redirect('/login');
+    return redirect('/dashboard');
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
       return error?.response?.data?.message;
@@ -34,6 +35,7 @@ const Register = () => {
   const errors = useActionData();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
+  useSession();
 
   // managing errors
   const [errorInput, setErrorInput] = useState({

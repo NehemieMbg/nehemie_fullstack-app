@@ -14,6 +14,7 @@ import customFetch from '../utils/customFetch';
 import { AxiosError } from 'axios';
 import { loginError } from '../utils/errorInput';
 import { useEffect, useState } from 'react';
+import useSession from '../hooks/useSession';
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
@@ -34,6 +35,8 @@ const Login = () => {
   const errors = useActionData();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
+
+  useSession();
 
   // managing errors
   const [errorInput, setErrorInput] = useState({
