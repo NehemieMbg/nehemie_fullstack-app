@@ -9,12 +9,6 @@ import cloudinary from 'cloudinary';
 import cors from 'cors';
 const app = express();
 
-app.use(
-  cors({
-    origin: 'https://career-compass-client.vercel.app/',
-  })
-);
-
 // Routers
 import jobRouter from './routes/jobRouter.js';
 import authRouter from './routes/authRouter.js';
@@ -40,6 +34,13 @@ import { authenticateUser } from './middleware/authMiddleware.js';
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev')); // To log info about requests
 }
+
+app.use(cors());
+app.use(
+  cors({
+    origin: 'https://career-compass-client.vercel.app/',
+  })
+);
 
 // allow access to public folder to get images
 app.use(express.static(path.resolve(__dirname, './public')));
