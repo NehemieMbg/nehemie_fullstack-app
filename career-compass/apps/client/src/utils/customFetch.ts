@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const customFetch = axios.create({
-  baseURL: '/api/v1',
+  baseURL: 'https://career-compass-client.vercel.app/api/v1',
 });
 
 export default customFetch;
