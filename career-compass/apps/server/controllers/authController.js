@@ -44,7 +44,6 @@ export const login = async (req, res) => {
     expires: new Date(Date.now() + oneDay),
     // secure: process.env.NODE_ENV === 'production', // To use https on production
     secure: true,
-    sameSite: 'none',
   });
   res.status(StatusCodes.OK).json({ msg: 'User logged in' });
 };
