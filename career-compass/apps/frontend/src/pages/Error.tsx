@@ -2,7 +2,6 @@ import { Link, useRouteError } from 'react-router-dom';
 
 const Error = () => {
   const error: unknown = useRouteError(); // to get access to the error object
-  console.log(error);
 
   // Using typeof to check if error is an object and has a status property
   if (typeof error === 'object' && error !== null && 'status' in error) {

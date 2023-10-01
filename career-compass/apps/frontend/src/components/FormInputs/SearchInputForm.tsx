@@ -51,11 +51,9 @@ const SearchInputForm: React.FC<InputProps> = ({
         defaultValue={defaultValue}
         required={required}
         onChange={(e) => {
-          setTriggered(() => {
-            if (e.target.value.length > 0) return true;
-            return false;
-          });
-          onChange(e);
+          const value = e?.target?.value || '';
+          setTriggered(() => value.length > 0);
+          if (onChange) onChange(e);
         }}
         placeholder={`Search In Your applications`}
         className={`w-full bg-dark-gray p-2 px-4 rounded-md outline-none font-roboto placeholder-light-gray mt-1 placeholder:pl-8

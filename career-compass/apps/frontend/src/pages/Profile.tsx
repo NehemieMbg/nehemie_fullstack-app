@@ -1,14 +1,20 @@
 import { InputFormJob } from '../components';
-import { useNavigation, useOutletContext, Form } from 'react-router-dom';
+import {
+  useNavigation,
+  useOutletContext,
+  Form,
+  ActionFunctionArgs,
+} from 'react-router-dom';
 // import customFetch from '../utils/customFetch';
 import { User } from '../types/userType';
 import customFetch from '../utils/customFetch';
 import { AxiosError } from 'axios';
 import { useState } from 'react';
 
-export const action = async ({ request }) => {
+export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
-  const file = formData.get('avatar');
+  const file = formData.get('avatar') as File;
+
   if (file && file.size < 50000) {
     return 'Image size too large';
   }
@@ -32,7 +38,8 @@ const Profile = () => {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
 
-  const handleFileChange = (e) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
     setFileName(e.target.files[0].name);
   };
 

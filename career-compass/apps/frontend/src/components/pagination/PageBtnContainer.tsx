@@ -17,7 +17,13 @@ const PageBtnContainer = () => {
     navigate(`${pathname}?${searchParams.toString()}`);
   };
 
-  const addPageButton = ({ pageNumber, activeClass }) => {
+  const addPageButton = ({
+    pageNumber,
+    activeClass,
+  }: {
+    pageNumber: number;
+    activeClass: boolean;
+  }) => {
     return (
       <button
         key={pageNumber}

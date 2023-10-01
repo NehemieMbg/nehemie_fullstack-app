@@ -1,10 +1,10 @@
 import { JobsContainer, SearchContainer } from '../components';
 import customFetch from '../utils/customFetch';
-import { useLoaderData } from 'react-router-dom';
+import { ActionFunctionArgs, useLoaderData } from 'react-router-dom';
 import { useContext, createContext } from 'react';
 import { AxiosError } from 'axios';
 
-export const loader = async ({ request }) => {
+export const loader = async ({ request }: ActionFunctionArgs) => {
   // Turning query params to an object
   // to be able to pass params (query) to the API
   const params = Object.fromEntries([
@@ -22,14 +22,35 @@ export const loader = async ({ request }) => {
   }
 };
 
-const AllJobsContext = createContext({
+type AllJobsContextType = {
   data: {
-    jobs: [],
-  },
-});
+    numOfPages: number;
+    currentPage: number;
+    totalJobs: number;
+    data: {
+      company: string;
+      createdAt: string;
+      createdBy: string;
+      jobLocation: string;
+      jobStatus: string;
+      jobType: string;
+      position: string;
+      updatedAt: string;
+      _id: string;
+    }[];
+  };
+  searchValues: {
+    search: string;
+    jobType: string;
+    jobStatus: string;
+    sort: string;
+  };
+};
+
+const AllJobsContext = createContext({} as AllJobsContextType);
 
 const AllJobs = () => {
-  const { data, searchValues } = useLoaderData() as any;
+  const { data, searchValues } = useLoaderData() as AllJobsContextType;
 
   return (
     <AllJobsContext.Provider value={{ data, searchValues }}>

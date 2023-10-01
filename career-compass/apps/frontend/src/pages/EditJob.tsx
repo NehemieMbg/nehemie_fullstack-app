@@ -1,4 +1,5 @@
 import {
+  ActionFunctionArgs,
   redirect,
   useActionData,
   useLoaderData,
@@ -6,10 +7,9 @@ import {
   useOutletContext,
 } from 'react-router-dom';
 import { JOB_STATUS, JOB_TYPE } from '../constants';
-import { Form, useNavigate } from 'react-router-dom';
+import { Form } from 'react-router-dom';
 import customFetch from '../utils/customFetch';
 import { AxiosError } from 'axios';
-import { useDashboardContext } from './DashboardLayout';
 import { User } from '../types/userType';
 import { InputFormJob, SelectFrom } from '../components';
 import { useEffect, useState } from 'react';
@@ -29,7 +29,7 @@ export const loader = async ({ params }: any) => {
   }
 };
 
-export const action = async ({ request, params }) => {
+export const action = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   try {
@@ -50,7 +50,7 @@ const EditJob = () => {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
 
-  const { user, isLightTheme } = useOutletContext() as {
+  const { isLightTheme } = useOutletContext() as {
     user: User;
     isLightTheme: boolean;
   };

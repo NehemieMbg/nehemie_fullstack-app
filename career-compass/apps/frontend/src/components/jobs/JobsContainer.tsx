@@ -1,14 +1,12 @@
 import { useAllJobsContext } from '../../pages/AllJobs';
 import { PageBtnContainer } from '..';
 import Job from './Job';
-import { useOutletContext } from 'react-router-dom';
 
 const JobsContainer = () => {
-  const { isLightTheme } = useOutletContext() as { isLightTheme: boolean };
   const { data } = useAllJobsContext() as any;
   const { totalJobs, numOfPages } = data;
 
-  const { data: jobs } = data;
+  const jobs = data.data;
 
   if (jobs?.length === 0) {
     return <div>No jobs found</div>;
