@@ -6,7 +6,7 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 import cloudinary from 'cloudinary';
 import cookieParser from 'cookie-parser';
-import helmet from 'helmet';
+import helmet from 'helmet/index.mjs';
 import mongoSanitize from 'express-mongo-sanitize';
 const app = express();
 
