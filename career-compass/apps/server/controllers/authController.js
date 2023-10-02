@@ -51,8 +51,8 @@ export const login = async (req, res) => {
 export const logout = (req, res) => {
   res.cookie('token', 'logout', {
     // logout is the string which will replace the token
-    secure: true,
     httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', // To use https on production
     expires: new Date(Date.now()), // Expires immediately to logout the user
     sameSite: 'none',
   });
