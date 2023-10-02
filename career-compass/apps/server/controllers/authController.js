@@ -42,7 +42,6 @@ export const login = async (req, res) => {
   res.cookie('token', token, {
     httpOnly: true, // To disable access to the cookie via client-side JS
     expires: new Date(Date.now() + oneDay),
-    domain: '.vercel.app',
     // secure: process.env.NODE_ENV === 'production', // To use https on production
     secure: true,
     sameSite: 'none',
