@@ -60,11 +60,11 @@ export const login = async (req, res) => {
 // };
 
 export const logout = (req, res) => {
-  res.cookie('token', '', {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    expires: new Date(0), // Set the date to epoch time, which is a past date
+  res.cookie('token', token, {
+    httpOnly: true, // To disable access to the cookie via client-side JS
+    expires: new Date(Date.now() - 10000),
+    secure: process.env.NODE_ENV === 'production', // To use https on production
     sameSite: 'none',
   });
-  res.status(StatusCodes.OK).json({ message: 'User logged out' });
+  res.status(StatusCodes.OK).json({ msg: 'User logged in' });
 };
