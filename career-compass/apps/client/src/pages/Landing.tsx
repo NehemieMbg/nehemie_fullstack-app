@@ -13,7 +13,9 @@ const Landing = () => {
     };
 
     try {
-      await customFetch.post('/auth/login', data);
+      await customFetch.post('/auth/login', data, {
+        withCredentials: true,
+      });
       return navigate('/dashboard');
     } catch (error) {
       if (error instanceof AxiosError) {

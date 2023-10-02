@@ -21,7 +21,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const data = Object.fromEntries(formData); // transform FormData into regular object
 
   try {
-    await customFetch.post('/auth/register', data);
+    await customFetch.post('/auth/register', data, {
+      withCredentials: true,
+    });
     return redirect('/dashboard');
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
