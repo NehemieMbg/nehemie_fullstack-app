@@ -4,9 +4,10 @@ dotenv.config();
 import express from 'express';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
-import cookieParser from 'cookie-parser';
 import cloudinary from 'cloudinary';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import helmet from 'helmet';
 const app = express();
 
 // Routers
@@ -46,6 +47,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(helmet());
 app.use(cookieParser());
 app.use(express.json());
 
