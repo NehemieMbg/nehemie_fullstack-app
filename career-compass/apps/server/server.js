@@ -6,8 +6,6 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 import cloudinary from 'cloudinary';
 import cookieParser from 'cookie-parser';
-import cors from 'cors';
-import helmet from 'helmet';
 const app = express();
 
 // Routers
