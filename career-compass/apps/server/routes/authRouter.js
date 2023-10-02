@@ -16,8 +16,8 @@ import {
 
 const router = Router();
 
-router.route('/register').post(apiLimiter, validateRegisterInput, register);
-router.route('/login').post(apiLimiter, validateLoginInput, login);
+router.route('/register').post(validateRegisterInput, register);
+router.route('/login').post(validateLoginInput, login);
 router.get('/logout', logout);
 
 export default router;
