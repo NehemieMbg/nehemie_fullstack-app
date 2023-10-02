@@ -5,9 +5,9 @@ import express from 'express';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import cloudinary from 'cloudinary';
-import cors from 'cors';
 import cookieParser from 'cookie-parser';
-// import helmet from 'helmet';
+import cors from 'cors';
+import helmet from 'helmet';
 const app = express();
 
 // Routers
@@ -39,15 +39,8 @@ if (process.env.NODE_ENV === 'development') {
 // allow access to public folder to get images
 app.use(express.static(path.resolve(__dirname, './public')));
 
+// app.use(cors());
 // app.use(helmet({ contentSecurityPolicy: false }));
-app.use(
-  cors({
-    origin: 'https://career-compass-client.vercel.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
-  })
-);
 app.use(cookieParser());
 app.use(express.json());
 
@@ -63,9 +56,9 @@ app.use('/api/v1/jobs', authenticateUser, jobRouter);
 app.use('/api/v1/users', authenticateUser, userRouter);
 app.use('/api/v1/auth', authRouter);
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, './public', 'index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './public', 'index.html'));
+});
 
 app.use('*', (req, res) => {
   res.status(404).json({ message: 'Not Found' });

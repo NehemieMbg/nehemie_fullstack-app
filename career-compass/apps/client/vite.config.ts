@@ -7,9 +7,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://career-compass-server.vercel.app',
+        target: 'http://localhost:5100/api',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '/api'),
+        rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
   },

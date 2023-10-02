@@ -6,18 +6,12 @@ import links from '../../utils/links';
 import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/solid';
 
 const Sidebar = () => {
-  const { toggleSideBar, isLightTheme, user } = useDashboardContext();
+  const { toggleSideBar, isLightTheme, user, logoutUser } =
+    useDashboardContext();
   const location = useLocation();
   const pathArray = location.pathname.split('/');
   const pathname = pathArray[2] || '.';
   // const pathname = '/dashboard';
-
-  const logoutUser = async () => {
-    await fetch('/auth/logout', {
-      method: 'GET',
-      credentials: 'include', // this corresponds to `withCredentials: true` in Axios
-    });
-  };
 
   return (
     <>

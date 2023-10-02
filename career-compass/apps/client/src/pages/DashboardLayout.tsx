@@ -1,4 +1,4 @@
-import { Outlet, redirect, useLoaderData } from 'react-router-dom';
+import { Outlet, redirect, useLoaderData, useNavigate } from 'react-router-dom';
 import { Navbar, Sidebar } from '../components';
 import { createContext, useContext, useRef, useState } from 'react';
 import useClickOutside from '../hooks/useClickOutside';
@@ -42,7 +42,7 @@ const checkDefaultTheme = () => {
 
 const DashboardLayout = () => {
   const { user } = useLoaderData() as { user: User };
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const sidebarRef = useRef<HTMLDivElement | null>(null);
 
@@ -64,10 +64,8 @@ const DashboardLayout = () => {
   };
 
   const logoutUser = async () => {
-    await customFetch.get('/auth/logout', {
-      withCredentials: true,
-    });
-    // navigate('/');
+    await customFetch.get('/auth/logout');
+    navigate('/');
   };
 
   useClickOutside(sidebarRef, () => setSidebar(false));

@@ -14,16 +14,13 @@ import customFetch from '../utils/customFetch';
 import { registerError } from '../utils/errorInput';
 import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
-import useSession from '../hooks/useSession';
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData); // transform FormData into regular object
 
   try {
-    await customFetch.post('/auth/register', data, {
-      withCredentials: true,
-    });
+    await customFetch.post('/auth/register', data);
     return redirect('/dashboard');
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
@@ -37,7 +34,6 @@ const Register = () => {
   const errors = useActionData();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
-  useSession();
 
   // managing errors
   const [errorInput, setErrorInput] = useState({
