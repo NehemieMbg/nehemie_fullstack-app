@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // allow access to public folder to get images
-app.use(express.static(path.resolve(__dirname, './client/dist')));
+app.use(express.static(path.resolve(__dirname, './public')));
 
 // app.use(cors());
 // app.use(helmet({ contentSecurityPolicy: false }));
@@ -55,7 +55,7 @@ app.use('/api/v1/users', authenticateUser, userRouter);
 app.use('/api/v1/auth', authRouter);
 
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, './client/dist', 'index.html'));
+  res.sendFile(path.resolve(__dirname, './public', 'index.html'));
 });
 
 app.use('*', (req, res) => {
