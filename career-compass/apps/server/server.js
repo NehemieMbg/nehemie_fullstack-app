@@ -35,7 +35,9 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev')); // To log info about requests
 }
 
-// app.use(cors());
+// allow access to public folder to get images
+app.use(express.static(path.resolve(__dirname, './public')));
+
 app.use(
   cors({
     origin: 'https://career-compass-client.vercel.app',
@@ -44,10 +46,6 @@ app.use(
     credentials: true,
   })
 );
-
-// allow access to public folder to get images
-app.use(express.static(path.resolve(__dirname, './public')));
-
 app.use(cookieParser());
 app.use(express.json());
 
