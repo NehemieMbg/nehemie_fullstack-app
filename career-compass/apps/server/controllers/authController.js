@@ -48,12 +48,22 @@ export const login = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: 'User logged in' });
 };
 
+// export const logout = (req, res) => {
+//   res.cookie('token', 'logout', {
+//     // logout is the string which will replace the token
+//     httpOnly: true,
+//     expires: new Date(Date.now() - 10000), // Expires immediately to logout the user
+//     secure: process.env.NODE_ENV === 'production', // To use https on production
+//     sameSite: 'none',
+//   });
+//   res.status(StatusCodes.OK).json({ message: 'User logged out' });
+// };
+
 export const logout = (req, res) => {
-  res.cookie('token', 'logout', {
-    // logout is the string which will replace the token
+  res.cookie('token', '', {
     httpOnly: true,
-    expires: new Date(Date.now() - 10000), // Expires immediately to logout the user
-    secure: process.env.NODE_ENV === 'production', // To use https on production
+    secure: process.env.NODE_ENV === 'production',
+    expires: new Date(0), // Set the date to epoch time, which is a past date
     sameSite: 'none',
   });
   res.status(StatusCodes.OK).json({ message: 'User logged out' });
