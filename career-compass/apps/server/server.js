@@ -39,6 +39,7 @@ if (process.env.NODE_ENV === 'development') {
 // allow access to public folder to get images
 app.use(express.static(path.resolve(__dirname, './public')));
 
+app.use(helmet());
 app.use(
   cors({
     origin: 'https://career-compass-client.vercel.app',
@@ -47,7 +48,6 @@ app.use(
     credentials: true,
   })
 );
-app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cookieParser());
 app.use(express.json());
 
