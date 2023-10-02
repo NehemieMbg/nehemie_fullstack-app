@@ -67,7 +67,7 @@ const DashboardLayout = () => {
     await customFetch.get('/auth/logout', {
       withCredentials: true,
     });
-    navigate('/');
+    // navigate('/');
   };
 
   useClickOutside(sidebarRef, () => setSidebar(false));
