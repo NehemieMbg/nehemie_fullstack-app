@@ -64,7 +64,9 @@ const DashboardLayout = () => {
   };
 
   const logoutUser = async () => {
-    await customFetch.get('/auth/logout');
+    await customFetch.get('/auth/logout', {
+      withCredentials: true,
+    });
     navigate('/');
   };
 
