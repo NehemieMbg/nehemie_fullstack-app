@@ -6,7 +6,7 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 import cloudinary from 'cloudinary';
 import cookieParser from 'cookie-parser';
-import helmet from 'helmet/index.mjs';
+// import helmet from 'helmet'; // index.mjs to pass vercel build
 import mongoSanitize from 'express-mongo-sanitize';
 const app = express();
 
@@ -43,7 +43,7 @@ app.use(express.static(path.resolve(__dirname, './public')));
 // app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cookieParser());
 app.use(express.json());
-app.use(helmet());
+// app.use(helmet());
 app.use(mongoSanitize());
 
 app.use('/api/v1/jobs', authenticateUser, jobRouter);

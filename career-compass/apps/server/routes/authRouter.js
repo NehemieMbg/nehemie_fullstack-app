@@ -4,15 +4,15 @@ import {
   validateRegisterInput,
   validateLoginInput,
 } from '../middleware/validationMiddleware.js';
-import rateLimiter from 'express-rate-limit/dist/index.cjs';
+// import rateLimiter from 'express-rate-limit'; // index.cjs to pass vercel build
 
-const apiLimiter = rateLimiter({
-  windowMs: 15 * 60 * 1000,
-  max: 15,
-  message: {
-    message: 'Too many requests from this IP, please try again in an hour!',
-  },
-});
+// const apiLimiter = rateLimiter({
+//   windowMs: 15 * 60 * 1000,
+//   max: 15,
+//   message: {
+//     message: 'Too many requests from this IP, please try again in an hour!',
+//   },
+// });
 
 const router = Router();
 
