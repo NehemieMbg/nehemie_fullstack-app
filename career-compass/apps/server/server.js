@@ -47,7 +47,7 @@ app.use(
     credentials: true,
   })
 );
-app.use(helmet());
+app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cookieParser());
 app.use(express.json());
 
