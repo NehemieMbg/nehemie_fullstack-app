@@ -38,6 +38,16 @@ if (process.env.NODE_ENV === 'development') {
 
 // allow access to public folder to get images
 app.use(express.static(path.resolve(__dirname, './public')));
+// Use the provided code to serve static files from the 'public' directory
+app.use(
+  express.static('public', {
+    setHeaders: function (res, path) {
+      if (path.endsWith('.js')) {
+        res.setHeader('Content-Type', 'application/javascript');
+      }
+    },
+  })
+);
 
 // app.use(cors());
 // app.use(helmet({ contentSecurityPolicy: false }));
