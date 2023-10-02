@@ -4,10 +4,7 @@ import {
   validateRegisterInput,
   validateLoginInput,
 } from '../middleware/validationMiddleware.js';
-import {
-  authenticateUser,
-  checkUserSession,
-} from '../middleware/authMiddleware.js';
+import { checkUserSession } from '../middleware/authMiddleware.js';
 
 const router = Router();
 
@@ -16,6 +13,6 @@ router
   .get(checkUserSession)
   .post(validateRegisterInput, register);
 router.route('/login').get(checkUserSession).post(validateLoginInput, login);
-router.get('/logout', authenticateUser, logout);
+router.get('/logout', logout);
 
 export default router;

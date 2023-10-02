@@ -52,7 +52,7 @@ export const logout = (req, res) => {
   res.cookie('token', 'logout', {
     // logout is the string which will replace the token
     httpOnly: true,
-    expires: new Date(Date.now()), // Expires immediately to logout the user
+    expires: new Date(Date.now() - 10000), // Expires immediately to logout the user
     secure: process.env.NODE_ENV === 'production', // To use https on production
     sameSite: 'none',
   });
