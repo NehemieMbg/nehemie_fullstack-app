@@ -42,8 +42,7 @@ export const login = async (req, res) => {
   res.cookie('token', token, {
     httpOnly: true, // To disable access to the cookie via client-side JS
     expires: new Date(Date.now() + oneDay),
-    // secure: process.env.NODE_ENV === 'production', // To use https on production
-    secure: true,
+    secure: process.env.NODE_ENV === 'production', // To use https on production
     sameSite: 'none',
   });
   res.status(StatusCodes.OK).json({ msg: 'User logged in' });
